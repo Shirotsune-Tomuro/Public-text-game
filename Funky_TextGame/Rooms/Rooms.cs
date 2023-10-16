@@ -18,8 +18,9 @@ namespace Funky_TextGame
         static RoomInstance CurrentRoom;        
         public void Rooms()
         {
-            RoomInstance Cave1 = new RoomInstance {RoomName = "Cave 1", RoomDescription = "You are in cave zone 1"}; 
+            Room Cave1 = new RoomInstance {RoomName = "Cave 1", RoomDescription = "You are in cave zone 1"}; 
             RoomInstance Cave2 = new RoomInstance {RoomName = "Cave 2", RoomDescription = "You are in cave zone 2"};
+            
         }
     }
 }
