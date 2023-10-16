@@ -6,21 +6,14 @@ using System.Threading.Tasks;
 using System.Transactions;
 
 namespace Funky_TextGame
-{
-    public class Room
+{    
+    public class Area
     {
-        public string RoomName { get; set; }
-        public string RoomDescription { get; set; }
-        public Dictionary<string, RoomInstance> Exits { get;} = new Dictionary<string, RoomInstance>();
+        public String Name;
+        public String Description;
+        public Dictionary<string, Area> Exits { get; } = new Dictionary<string, Area>();
     }
-    public class RoomInstance
-    {
-        static RoomInstance CurrentRoom;        
-        public void Rooms()
-        {
-            Room Cave1 = new RoomInstance {RoomName = "Cave 1", RoomDescription = "You are in cave zone 1"}; 
-            RoomInstance Cave2 = new RoomInstance {RoomName = "Cave 2", RoomDescription = "You are in cave zone 2"};
-            
-        }
-    }
+    //EnemyPool
+    //LootPool
 }
+
