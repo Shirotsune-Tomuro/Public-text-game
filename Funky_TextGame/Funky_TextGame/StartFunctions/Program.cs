@@ -18,7 +18,7 @@ namespace Funky_TextGame.StartFunctions
             CursorVisible = false;
             try
             {
-                SetWindowSize(100,40);            
+                SetWindowSize(50,40);            
             }
             catch
             {
