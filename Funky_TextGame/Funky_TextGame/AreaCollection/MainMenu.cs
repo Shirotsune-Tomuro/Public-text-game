@@ -9,7 +9,7 @@ using static System.Console;
 namespace Funky_TextGame.AreaCollection
 {
     class MainMenu : Area
-    {
+    {        
         public MainMenu(Game Game) : base(Game)
         {
             Name = "MainMenu";
@@ -32,7 +32,7 @@ namespace Funky_TextGame.AreaCollection
             switch (selectedIndex)
             {
                 case 0:
-                    // something will go here
+                    myGame.MyCave1.Run();
                     break;
                 case 1:
                     myGame.MyAbout.Run();

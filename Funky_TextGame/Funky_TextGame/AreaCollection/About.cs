@@ -18,7 +18,7 @@ namespace Funky_TextGame.AreaCollection
         {
             RunAbout();
         }
-        private async void RunAbout()
+        private void RunAbout()
         {
             Name = "About page";
             Description = "Provides information about the game and its developer";
@@ -26,7 +26,7 @@ namespace Funky_TextGame.AreaCollection
 
             Clear();
             WriteLine(Description);
-            WriteLine("\n\nThis is a project created by I \"Ruben James Thompson\" for assignment 1 of \" Programming Foundations\" \n" +
+            WriteLine("\n\nThis is a project created by I \"Ruben James Thompson\" for assignment 1 of \" Programming Foundations\" \n\n" +
                                   "During this project i had learned many things as i did not have much foundational knowledge \n" +
                                   "in proggramming prior Not only have I learned much about programming, i have also learned \n" +
                                   "much about code formatting and how to keep things tidy I hope this project will not only allow \n" +
