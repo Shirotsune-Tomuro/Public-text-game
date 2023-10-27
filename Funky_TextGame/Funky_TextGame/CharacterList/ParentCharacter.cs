@@ -16,6 +16,7 @@ namespace Funky_TextGame.CharacterList
         public String Name;
         public String Description;
         public int Strength;
+        public int Dexterity;
         public int Mana;
         public int Health;
         public int Armour;

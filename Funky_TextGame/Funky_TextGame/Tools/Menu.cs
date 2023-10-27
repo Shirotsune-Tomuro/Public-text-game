@@ -52,15 +52,16 @@ namespace Funky_TextGame
             //funny nested bools in a while loop
             ConsoleKey Key;
             do
-            {
-                Clear();
+            {                  
                 DisplayOptions();
+                WriteLine("\n");
 
                 ConsoleKeyInfo keyInfo = Console.ReadKey(true);
                 Key = keyInfo.Key;
 
                 if (Key == ConsoleKey.UpArrow)
                 {
+                    Clear();
                     selectedIndex--;
                     if (selectedIndex == -1)
                     {
@@ -70,6 +71,7 @@ namespace Funky_TextGame
                 }
                 else if (Key == ConsoleKey.DownArrow)
                 {
+                    Clear();
                     selectedIndex++;
                     if (selectedIndex == Options.Length)
                     {
@@ -80,7 +82,9 @@ namespace Funky_TextGame
 
             } while (Key != ConsoleKey.Enter);
             //returns an index value to wherever called the function
+
             return selectedIndex;
         }
+        
     }
 }

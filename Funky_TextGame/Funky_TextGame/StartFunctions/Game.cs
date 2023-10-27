@@ -17,6 +17,7 @@ namespace Funky_TextGame.StartFunctions
         public Combat MyCombat;
         public Cave1 MyCave1;
         public DefaultPlayer MyDefaultPlayer;
+        public DefaultEnemy MyEnemy;
 
         public Game()
         {
@@ -25,7 +26,8 @@ namespace Funky_TextGame.StartFunctions
             MyCombat = new Combat(this);
             MyCave1 = new Cave1(this);
             MyDefaultPlayer = new DefaultPlayer(this);
-        }
+            MyEnemy = new DefaultEnemy(this);
+        }       
 
         // which level the game will start on
         public void Start()

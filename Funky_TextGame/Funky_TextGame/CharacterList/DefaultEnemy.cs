@@ -9,9 +9,9 @@ using static System.Console;
 
 namespace Funky_TextGame.CharacterList
 {
-    class DefaultPlayer : ParentCharacter
+    class DefaultEnemy : ParentCharacter
     {
-        public DefaultPlayer(Game Game) : base(Game)
+        public DefaultEnemy(Game Game) : base(Game)
         {            
             Description = "You the player";
             Strength = 10;
@@ -27,13 +27,13 @@ namespace Funky_TextGame.CharacterList
         }
         private static void CombatPanel()
         {
-            string prompt = "Combat related stuff\n";
+            string prompt = "";
             string[] options = { "Attack", "Defend", "Flee" };
             Menu mainMenu = new Menu(prompt, options);
             int selectedIndex = mainMenu.Run();
         }
         
-        public void attack()
+        public void RandomShenanigan()
         {
             if (Health >= Level)
             {
