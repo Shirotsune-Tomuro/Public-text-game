@@ -23,24 +23,26 @@ namespace Funky_TextGame.CharacterList
             Damage = (int)(StrengthStat * Level);
             MaxHealth = (int)(HealthStat * Level);
             CurrentHealth = MaxHealth;
-
+                        
         }
         public override void Run()
-        {
-            CombatPanel();
-        }
-        private static void CombatPanel()
-        {
-          
-        }
+        {            
+        }        
         
-        public void attack()
+        public enum Attacks
         {
-            if (CurrentHealth >= Level)
-            {
-                CurrentHealth += CurrentHealth - 1;
-            }
+            BasicAttack,
+            HeavyAttack            
         }
+        public void BasicAttack()
+        {            
+            myGame.MyEnemy.CurrentHealth -= Damage;
+        }
+        public void HeavyAttack()
+        {
+            myGame.MyEnemy.CurrentHealth -= Damage;
+            CurrentHealth -= myGame.MyEnemy.Damage / 2;
+        }      
 
     }
 }
