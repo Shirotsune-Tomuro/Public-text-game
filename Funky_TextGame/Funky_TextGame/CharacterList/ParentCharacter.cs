@@ -15,10 +15,14 @@ namespace Funky_TextGame.CharacterList
 
         public String Name;
         public String Description;
-        public int Strength;
-        public int Dexterity;
-        public int Mana;
-        public int Health;
+        public int StrengthStat;
+        public int WeaponPower;
+        public int Damage;
+        public int DexterityStat;
+        public int ManaStat;
+        public int HealthStat;
+        public int MaxHealth;
+        public int CurrentHealth;
         public int Armour;
         public int Level;
 

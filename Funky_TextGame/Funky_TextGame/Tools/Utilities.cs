@@ -22,17 +22,13 @@ namespace Funky_TextGame
             ReadKey(true);
             Environment.Exit(0);
         }
-        public static async Task Delay(string Text)
+        public static void Delay(string Text)
         {
             foreach (char c in Text)
             {
                 Console.Write(c);
-                // delays each character for a more natural game feel
-                await Task.Delay(50);
-            }
-
-            Thread.Sleep(700); // creates a delay before writing the next line
-            Console.WriteLine(); // readies the next line
+                Thread.Sleep(20);
+            }            
         }
     }
 

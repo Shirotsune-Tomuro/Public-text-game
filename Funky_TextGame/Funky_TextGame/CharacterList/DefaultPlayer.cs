@@ -14,12 +14,16 @@ namespace Funky_TextGame.CharacterList
         public DefaultPlayer(Game Game) : base(Game)
         {            
             Description = "You the player";
-            Strength = 10;
-            Dexterity = 10;
-            Mana = 10;
-            Health = 10;
-            Armour = 0;
             Level = 1;
+            Armour = 0;
+            StrengthStat = 6;
+            DexterityStat = 10;
+            ManaStat = 10;
+            HealthStat = 10;
+            Damage = (int)(StrengthStat * Level);
+            MaxHealth = (int)(HealthStat * Level);
+            CurrentHealth = MaxHealth;
+
         }
         public override void Run()
         {
@@ -27,17 +31,14 @@ namespace Funky_TextGame.CharacterList
         }
         private static void CombatPanel()
         {
-            string prompt = "Combat related stuff\n";
-            string[] options = { "Attack", "Defend", "Flee" };
-            Menu mainMenu = new Menu(prompt, options);
-            int selectedIndex = mainMenu.Run();
+          
         }
         
         public void attack()
         {
-            if (Health >= Level)
+            if (CurrentHealth >= Level)
             {
-                Health = Health - 1;
+                CurrentHealth += CurrentHealth - 1;
             }
         }
 

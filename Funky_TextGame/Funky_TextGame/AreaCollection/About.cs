@@ -12,29 +12,28 @@ namespace Funky_TextGame.AreaCollection
     {
         public About(Game Game) : base(Game) 
         {
-            
+             Name = "About page";
+             Description = "Provides information about the game and its developer";
         }
         public override void Run()
         {
             RunAbout();
         }
         private void RunAbout()
-        {
-            Name = "About page";
-            Description = "Provides information about the game and its developer";
-
+        {       
 
             Clear();
             WriteLine(Description);
-            WriteLine("\n\nThis is a project created by I \"Ruben James Thompson\" for assignment 1 of \" Programming Foundations\" \n\n" +
-                                  "During this project i had learned many things as i did not have much foundational knowledge \n" +
-                                  "in proggramming prior Not only have I learned much about programming, i have also learned \n" +
-                                  "much about code formatting and how to keep things tidy I hope this project will not only allow \n" +
-                                  "a glimpse into what i have learned this semester, but also allow you to have a bit of fun :D" +
+            Utilities.Delay("\n\nThis is a project created by I \"Ruben James Thompson\" for assignment 1 of \" Programming Foundations\" \n\n" +
+                                  "During this project i had learned many things as i had limited foundational knowledge \n" +
+                                  "Not only have I learned much about programming, but also about code formatting and keeping things tidy\n" +
+                                  "I hope this project will not only allow a glimpse into what i have learned this semester\n" +
+                                  "but also allow you to have a bit of fun :D" +
                                   "\n\n");
             Thread.Sleep(1000);
             WriteLine("Press any key to return");
             ReadKey(true);
+            Clear();
             myGame.MyMainMenu.Run();
         }
     }

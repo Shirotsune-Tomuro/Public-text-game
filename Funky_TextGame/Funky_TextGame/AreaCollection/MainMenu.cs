@@ -25,8 +25,9 @@ namespace Funky_TextGame.AreaCollection
         private void RunMainMenu()
         {            
             string prompt = "Welcome to Funky Text Game, What would you like to do?\n";
+            string prompt2 = "";
             string[] options = { "play", "About", "Exit" };
-            Menu mainMenu = new Menu(prompt, options);
+            Menu mainMenu = new Menu(prompt, options, prompt2);
             int selectedIndex = mainMenu.Run();
 
             switch (selectedIndex)

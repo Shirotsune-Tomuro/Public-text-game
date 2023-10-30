@@ -12,17 +12,20 @@ namespace Funky_TextGame
         private int selectedIndex;
         private string[] Options;
         private string Prompt;
+        private string Prompt2;
 
-        public Menu(string prompt, string[] options)
+        public Menu(string prompt, string[] options, string prompt2)
         {
             Prompt = prompt;
+            Prompt2 = prompt2;
             Options = options;
             selectedIndex = 0;
         }
         //makes it so this data can't be edited outside of this blueprint
         private void DisplayOptions()
-        {
+        {            
             WriteLine(Prompt);
+            WriteLine("-----------------------------------");
             for (int i = 0; i < Options.Length; i++)
             {
                 string currentOption = Options[i];
@@ -41,6 +44,7 @@ namespace Funky_TextGame
                     ResetColor();
                 }
                 //writes each menu on a new line alongside its defined prefix
+                CursorLeft += 10;
                 WriteLine($"{prefix} [ {currentOption} ]");
             }
             ResetColor();
@@ -52,16 +56,18 @@ namespace Funky_TextGame
             //funny nested bools in a while loop
             ConsoleKey Key;
             do
-            {                  
+            {
+                Clear();
                 DisplayOptions();
+                WriteLine("-----------------------------------");
                 WriteLine("\n");
+                WriteLine(Prompt2);
 
                 ConsoleKeyInfo keyInfo = Console.ReadKey(true);
                 Key = keyInfo.Key;
 
                 if (Key == ConsoleKey.UpArrow)
-                {
-                    Clear();
+                {                    
                     selectedIndex--;
                     if (selectedIndex == -1)
                     {
@@ -70,8 +76,7 @@ namespace Funky_TextGame
 
                 }
                 else if (Key == ConsoleKey.DownArrow)
-                {
-                    Clear();
+                {                   
                     selectedIndex++;
                     if (selectedIndex == Options.Length)
                     {
