@@ -12,7 +12,8 @@ namespace Funky_TextGame.CharacterList
     class DefaultPlayer : ParentCharacter
     {
         public DefaultPlayer(Game Game) : base(Game)
-        {            
+        {          
+            // filling in the variables from the parent class
             Description = "You the player";
             Level = 1;
             Armour = 0;
@@ -28,19 +29,14 @@ namespace Funky_TextGame.CharacterList
         public override void Run()
         {            
         }        
-        
-        public enum Attacks
-        {
-            BasicAttack,
-            HeavyAttack            
-        }
+       
         public void BasicAttack()
         {            
             myGame.MyEnemy.CurrentHealth -= Damage;
         }
         public void HeavyAttack()
         {
-            myGame.MyEnemy.CurrentHealth -= Damage;
+            myGame.MyEnemy.CurrentHealth -= Damage * 2;
             CurrentHealth -= myGame.MyEnemy.Damage / 2;
         }      
 

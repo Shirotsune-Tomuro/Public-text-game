@@ -13,18 +13,18 @@ namespace Funky_TextGame.CharacterList
     {
         protected Game myGame;
 
-        public String Name;
-        public String Description;
-        public int StrengthStat;
-        public int WeaponPower;
-        public int Damage;
-        public int DexterityStat;
-        public int ManaStat;
-        public int HealthStat;
-        public int MaxHealth;
-        public int CurrentHealth;
-        public int Armour;
-        public int Level;
+        public String Name = "";
+        public String Description = "";
+        public int StrengthStat = 0;
+        public int WeaponPower = 0;
+        public int Damage = 0;
+        public int DexterityStat = 0;
+        public int ManaStat = 0;
+        public int HealthStat = 0;
+        public int MaxHealth = 0;
+        public int CurrentHealth = 0;   
+        public int Armour = 0;
+        public int Level = 0;
 
         //all levels pass throught the game class
         public ParentCharacter(Game Game)

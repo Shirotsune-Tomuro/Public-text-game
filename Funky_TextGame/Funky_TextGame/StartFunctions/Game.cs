@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using Funky_TextGame.AreaCollection;
@@ -25,9 +26,12 @@ namespace Funky_TextGame.StartFunctions
             MyAbout = new About(this);
             MyCombat = new Combat(this);
             MyCave1 = new Cave1(this);
-            MyDefaultPlayer = new DefaultPlayer(this);
-            MyEnemy = new DefaultEnemy(this);
-        }       
+            MyDefaultPlayer = new DefaultPlayer(this);           
+        } 
+        public void SpawnEnemy()
+        {
+           MyEnemy = new DefaultEnemy(this);
+        }      
 
         // which level the game will start on
         public void Start()

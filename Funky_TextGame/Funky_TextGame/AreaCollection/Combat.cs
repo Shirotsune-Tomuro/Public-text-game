@@ -18,57 +18,89 @@ namespace Funky_TextGame.Funky_TextGame.AreaCollection
             Name = "placeholder text";
             Description = "placeholder text 2";
         }
-        public enum Options
-        {
-            attack,
-            defend,
-            flee
-        }                 
+               
 
         public override void Run()
         {
-            StartCombat();
+            CombatSetup();
         }
+        private void CombatSetup()
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                myGame.SpawnEnemy();
+            }
+            StartCombat();
+        }   
 
         private void StartCombat()
         { 
-            string? prompt2 = default;
-            string option1 = Options.attack.ToString();          
-            string option2 = Options.defend.ToString();          
-            string option3 = Options.flee.ToString();          
+            string prompt2 = "";
+            string option1 = "Attack";          
+            string option2 = "Defend";          
+            string option3 = "Flees";
+
+
 
             do
-            {          
-            string prompt = $@"You have engaged in combat
+            {
+                string prompt = $@"You have engaged in combat
 Current Health : {myGame.MyDefaultPlayer.CurrentHealth}     Enemy Health :   {myGame.MyEnemy.CurrentHealth}
-        Damage : {myGame.MyDefaultPlayer.Damage}";                           
-            string[] options = { option1, option2, option3 };          
-            Menu mainMenu = new Menu(prompt, options, prompt2);            
-            int selectedIndex = mainMenu.Run();            
-           
+        Damage : {myGame.MyDefaultPlayer.Damage}";
+                string[] options = { option1, option2, option3 };
+                Menu mainMenu = new Menu(prompt, options, prompt2);
+                int selectedIndex = mainMenu.Run();
+                MainSelect(selectedIndex);
+                //int selectedOption = selectedIndex + (int)MenuEnums.Options;
+            }while (myGame.MyDefaultPlayer.CurrentHealth > 0 && myGame.MyEnemy.CurrentHealth > 0);
+
+            void MainSelect(int selectedIndex)
+            {
+
                 switch (selectedIndex)
                 {
 
-                    case 0:
-                        {
-                            option1 = DefaultPlayer.Attacks.BasicAttack.ToString();
-                            option2 = DefaultPlayer.Attacks.HeavyAttack.ToString();
-                            option3 = " ";                            
-                        }
+                    case (int)MenuOptions.attack:
+                       {
+                            option1 = "BasicAttack";
+                            option2 = "HeavyAttack";
+                            option3 = " ";
+                            AttackSelect(selectedIndex);
+                       }
                         break;
-                    case 1:
-                        {
-                            prompt2 = (prompt2 + "\nYou defend against your opponents attacks");
-                        }
-                        break;
-                    case 2:
+                    case (int)MenuOptions.defend:
+                            {
+                              prompt2 = (prompt2 + "\nYou defend against your opponents attacks");
+                            }
+                            break;
+                    case (int)MenuOptions.flee:
                         {
                             prompt2 = (prompt2 + "\nYou Attempt to flee");
                         }
-                        break;                    
+                       break;
+                    default:
+                        break;
+                    }
+            }
+            void AttackSelect(int selectedIndex)
+            {
+                switch (selectedIndex)
+                {
+                    case (int)AttackOptions.BasicAttack:
+                    {
+                        myGame.MyDefaultPlayer.BasicAttack();
+                    }
+                        break;
+                    case (int)AttackOptions.HeavyAttack:
+                    {
+                                myGame.MyDefaultPlayer.HeavyAttack();
+                    }
+                        break;
+                    default:
+                        break;
+
                 }
-            } while (myGame.MyDefaultPlayer.CurrentHealth > 0 && myGame.MyEnemy.CurrentHealth > 0);
-            Clear();         
+            }                                   
 
         }
         

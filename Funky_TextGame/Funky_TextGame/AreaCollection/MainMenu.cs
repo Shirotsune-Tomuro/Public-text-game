@@ -19,7 +19,7 @@ namespace Funky_TextGame.AreaCollection
 
         public override void Run()
         {
-            RunMainMenu();
+            RunMainMenu();            
         }
 
         private void RunMainMenu()
@@ -43,6 +43,6 @@ namespace Funky_TextGame.AreaCollection
                     break;
             }
         }
-    }
+    }    
 
 }

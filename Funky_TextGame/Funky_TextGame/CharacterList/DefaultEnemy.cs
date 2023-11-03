@@ -13,7 +13,8 @@ namespace Funky_TextGame.CharacterList
     {
         public DefaultEnemy(Game Game) : base(Game)
         {            
-            Description = "You the player";            
+            Description = "The enemy";
+            Name = "placeholder name";
             Level = 1;
             Armour = 0;
             StrengthStat = 5;            
