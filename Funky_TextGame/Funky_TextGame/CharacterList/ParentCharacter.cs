@@ -25,14 +25,17 @@ namespace Funky_TextGame.CharacterList
         public int CurrentHealth = 0;   
         public int Armour = 0;
         public int Level = 0;
+        public int Exp = 0;
+        public int ReqExp = 0;
+        public int MaxArmour = 0;     
 
-        //all levels pass throught the game class
+        //all characters pass throught the game class
         public ParentCharacter(Game Game)
         {
             myGame = Game;
         }
-        //this can be edited per child
-        virtual public void Run()
+        //this can be edited per child      
+        virtual public void LifeCheck()
         {
 
         }

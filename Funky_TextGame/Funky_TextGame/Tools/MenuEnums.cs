@@ -6,16 +6,17 @@ using System.Threading.Tasks;
 
 namespace Funky_TextGame
 {
-        public enum MenuOptions
-        {
-            attack,
-            defend,
-            flee            
-        }
+    public enum MenuOptions
+    {
+        attack,
+        defend,
+        flee
+    }
 
     public enum AttackOptions
     {
-            BasicAttack,
-            HeavyAttack 
+        BasicAttack,
+        HeavyAttack
     }
+   
 }

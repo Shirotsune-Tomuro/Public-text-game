@@ -23,25 +23,68 @@ namespace Funky_TextGame.CharacterList
             HealthStat = 15;
             Damage = (int)(StrengthStat * Level * 0.9);
             MaxHealth = (int)(HealthStat * Level * 1.5);
-            CurrentHealth = MaxHealth;    
+            CurrentHealth = MaxHealth;
+            Exp = 15;
                                    
-        }
-        public override void Run()
-        {
-            CombatPanel();
-        }
-        private static void CombatPanel()
-        {
-         
-        }
+        }       
         
         public void RandomShenanigan()
         {
-            if (CurrentHealth >= Level)
+            var rand = new Random();
+            int SelectedIndex = 0;
+            SelectedIndex = rand.Next(4);
+
+            switch (SelectedIndex) 
             {
-                CurrentHealth = CurrentHealth - 1;
+                case 1:
+                    Attack();
+                break;
+                case 2:
+                    Defend();
+                break;
+                case 3:
+                    Flee();
+                break;
+                default:
+                break;
             }
         }
+        public void Attack()
+        {
+            if (myGame.MyDefaultPlayer.Armour < Damage)
+            {
+                myGame.MyDefaultPlayer.CurrentHealth -= Damage - myGame.MyDefaultPlayer.Armour;
+            }
+            else
+            {
+                WriteLine("You defend against the enemy's attack");
+            }
+        }
+        public void Defend()
+        {
+            Armour += 5;
+            if (Armour > MaxArmour)
+            {
+                Armour = MaxArmour;
+            }
+        }
+        public void Flee()
+        {
 
+        }
+
+        ~DefaultEnemy()
+        {
+            if (CurrentHealth > 0)
+            {
+                WriteLine("Enemy has successfully fled");
+
+            }
+            else
+            {
+                WriteLine("You have defeated the enemy");
+                myGame.MyDefaultPlayer.Exp += Exp;
+            }
+        }
     }
 }

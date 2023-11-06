@@ -18,7 +18,7 @@ namespace Funky_TextGame.Funky_TextGame.AreaCollection
             Name = "placeholder text";
             Description = "placeholder text 2";
         }
-               
+
 
         public override void Run()
         {
@@ -26,21 +26,17 @@ namespace Funky_TextGame.Funky_TextGame.AreaCollection
         }
         private void CombatSetup()
         {
-            for (int i = 0; i < 3; i++)
-            {
-                myGame.SpawnEnemy();
-            }
+            myGame.SpawnEnemy();
             StartCombat();
-        }   
+        }
 
         private void StartCombat()
-        { 
+        {
             string prompt2 = "";
-            string option1 = "Attack";          
-            string option2 = "Defend";          
-            string option3 = "Flees";
-
-
+            string option1 = "Attack";
+            string option2 = "Defend";
+            string option3 = "Flee";
+            bool AttackMenu = false;
 
             do
             {
@@ -50,60 +46,68 @@ Current Health : {myGame.MyDefaultPlayer.CurrentHealth}     Enemy Health :   {my
                 string[] options = { option1, option2, option3 };
                 Menu mainMenu = new Menu(prompt, options, prompt2);
                 int selectedIndex = mainMenu.Run();
-                MainSelect(selectedIndex);
-                //int selectedOption = selectedIndex + (int)MenuEnums.Options;
-            }while (myGame.MyDefaultPlayer.CurrentHealth > 0 && myGame.MyEnemy.CurrentHealth > 0);
 
-            void MainSelect(int selectedIndex)
-            {
-
-                switch (selectedIndex)
+                if (AttackMenu == false)
                 {
 
-                    case (int)MenuOptions.attack:
-                       {
-                            option1 = "BasicAttack";
-                            option2 = "HeavyAttack";
-                            option3 = " ";
-                            AttackSelect(selectedIndex);
-                       }
-                        break;
-                    case (int)MenuOptions.defend:
+                    switch (selectedIndex)
+                    {
+                        case (int)MenuOptions.attack:
                             {
-                              prompt2 = (prompt2 + "\nYou defend against your opponents attacks");
+                                option1 = "BasicAttack";
+                                option2 = "HeavyAttack";
+                                option3 = " ";
+                                AttackMenu = true;
                             }
                             break;
-                    case (int)MenuOptions.flee:
-                        {
-                            prompt2 = (prompt2 + "\nYou Attempt to flee");
-                        }
-                       break;
-                    default:
-                        break;
+                        case (int)MenuOptions.defend:
+                            {
+                                myGame.MyDefaultPlayer.Defend();
+                                prompt2 = (prompt2 + "\nYou raise your guard");
+                            }
+                            break;
+                        case (int)MenuOptions.flee:
+                            {
+                                prompt2 = (prompt2 + "\nYou Attempt to flee");
+                            }
+                            break;
+                        default:
+                            break;
                     }
-            }
-            void AttackSelect(int selectedIndex)
-            {
-                switch (selectedIndex)
-                {
-                    case (int)AttackOptions.BasicAttack:
-                    {
-                        myGame.MyDefaultPlayer.BasicAttack();
-                    }
-                        break;
-                    case (int)AttackOptions.HeavyAttack:
-                    {
-                                myGame.MyDefaultPlayer.HeavyAttack();
-                    }
-                        break;
-                    default:
-                        break;
-
                 }
-            }                                   
+                else
+                {
+
+                    switch (selectedIndex)
+                    {
+                        case (int)AttackOptions.BasicAttack:
+                            {
+                                myGame.MyDefaultPlayer.BasicAttack();
+                                prompt2 = (prompt2 + "\nYou slash your opponent");
+                            }
+                            break;
+                        case (int)AttackOptions.HeavyAttack:
+                            {
+                                myGame.MyDefaultPlayer.HeavyAttack();
+                                prompt2 = (prompt2 + "\nYou take a heavy swing at the enemy");
+                            }
+                            break;
+                        default:
+                            break;
+
+                    }
+                    AttackMenu = false;
+                    option1 = "Attack";
+                    option2 = "Defend";
+                    option3 = "Flee";
+                }
+
+                myGame.MyEnemy.RandomShenanigan();
+
+            } while (myGame.MyDefaultPlayer.CurrentHealth > 0 && myGame.MyEnemy.CurrentHealth > 0);
 
         }
-        
-        
+
+
     }
 }
