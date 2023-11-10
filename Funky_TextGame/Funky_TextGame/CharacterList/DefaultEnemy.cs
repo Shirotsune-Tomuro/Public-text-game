@@ -12,19 +12,20 @@ namespace Funky_TextGame.CharacterList
     class DefaultEnemy : ParentCharacter
     {
         public DefaultEnemy(Game Game) : base(Game)
-        {            
+        {
+            var rand = new Random();
             Description = "The enemy";
             Name = "placeholder name";
-            Level = 1;
+            Level = rand.Next(myGame.MyDefaultPlayer.Level - 1, myGame.MyDefaultPlayer.Level + 1);
             Armour = 0;
-            StrengthStat = 5;            
+            StrengthStat = 2;            
             DexterityStat = 10;
             ManaStat = 10;
             HealthStat = 15;
             Damage = (int)(StrengthStat * Level * 0.9);
             MaxHealth = (int)(HealthStat * Level * 1.5);
             CurrentHealth = MaxHealth;
-            Exp = 15;
+            Exp = (15 * Level);
                                    
         }       
         
@@ -53,15 +54,17 @@ namespace Funky_TextGame.CharacterList
         {
             if (myGame.MyDefaultPlayer.Armour < Damage)
             {
+                WriteLine("\nThe enemy attacks you");
                 myGame.MyDefaultPlayer.CurrentHealth -= Damage - myGame.MyDefaultPlayer.Armour;
             }
             else
             {
-                WriteLine("You defend against the enemy's attack");
+                WriteLine("\nYou defend against the enemy's attack");
             }
         }
         public void Defend()
         {
+            WriteLine("\nThe enemy takes a defensive posture");
             Armour += 5;
             if (Armour > MaxArmour)
             {
@@ -70,19 +73,18 @@ namespace Funky_TextGame.CharacterList
         }
         public void Flee()
         {
-
+            WriteLine("\nThe enemy attempts to flee. However, the ability to flee is not implemented so you get a free action. Lucky you.");
         }
 
-        ~DefaultEnemy()
+        public override void LifeCheck()
         {
             if (CurrentHealth > 0)
             {
-                WriteLine("Enemy has successfully fled");
+                WriteLine("\nEnemy has successfully fled");
 
             }
             else
-            {
-                WriteLine("You have defeated the enemy");
+            {               
                 myGame.MyDefaultPlayer.Exp += Exp;
             }
         }

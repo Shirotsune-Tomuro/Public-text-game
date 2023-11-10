@@ -27,21 +27,21 @@ namespace Funky_TextGame.StartFunctions
             MyAbout = new About(this);
             MyCombat = new Combat(this);
             MyCave1 = new Cave1(this);
-            MyCharacterList.Add(new DefaultPlayer(this));           
+            MyCharacterList = new List<ParentCharacter>();
+            MyDefaultPlayer = new DefaultPlayer(this);
+            MyCharacterList.Add(MyDefaultPlayer);           
 
         } 
-        public void SpawnEnemy()
+        //Spawns an enemy when invoked
+        public void SpawnCharacters()
         {
-            MyCharacterList.Add(new DefaultEnemy(this));
+            MyCharacterList.Add(MyEnemy = new DefaultEnemy(this));
         }      
 
         // which level the game will start on
         public void Start()
         {
-            MyMainMenu.Run();
-
-            //MyCharacterList.Count();
-            //MyCharacterList[0].
+            MyMainMenu.Run();           
         }
     }
 }

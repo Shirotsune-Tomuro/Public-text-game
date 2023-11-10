@@ -13,14 +13,14 @@ namespace Funky_TextGame.CharacterList
     {
         public DefaultPlayer(Game Game) : base(Game)
         {
-            // filling in the variables from the parent class
+            //Constructor for the player character
             Description = "You the player";
-            Level = 1;
+            Level = 14;
             Armour = 0;
             StrengthStat = 6;
             DexterityStat = 10;
             ManaStat = 10;
-            HealthStat = 10;
+            HealthStat = 15;
             Damage = (int)(StrengthStat * Level);
             MaxHealth = (int)(HealthStat * Level);
             CurrentHealth = MaxHealth;
@@ -28,11 +28,8 @@ namespace Funky_TextGame.CharacterList
             ReqExp = 100;
             MaxArmour = 10;
 
-        }       
-        public override void LifeCheck()
-        {
-            
-        }
+        }    
+        
 
         public void BasicAttack()
         {
@@ -67,10 +64,40 @@ namespace Funky_TextGame.CharacterList
             }
         }
 
-        ~DefaultPlayer()
+        public override void LifeCheck()
         {
-            WriteLine("This is game over, please exit the console to play again");
+            if (CurrentHealth > 0)
+            {
+                WriteLine("\nCongratulations on your victory");
+                LevelCheck();
+            }
+            else
+            {
+                WriteLine("\nThis is game over, please exit the console to play again");
+            }
+        }     
+        private void LevelCheck()
+        {
+            if (Exp >= ReqExp)
+            {   
+                Exp = 0;   
+                Level += 1;          
+                WriteLine("\nYou have reached level " + Level + ". Congratulations!");                
+                ReqExp = (int)(ReqExp * 1.5);                
+                LevelUp();
+            }            
         }
+        private void LevelUp()
+        {
+            
+            HealthStat += 1;
+            StrengthStat += 2;
+            Armour += 4;
+            MaxArmour += 4;
+            CurrentHealth = MaxHealth;
+            
+        }
+
 
 
     }
