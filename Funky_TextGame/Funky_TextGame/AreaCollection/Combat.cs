@@ -18,7 +18,7 @@ namespace Funky_TextGame.Funky_TextGame.AreaCollection
         public Combat(Game Game) : base(Game)
         {
             Name = "placeholder text";
-            Description = "placeholder text 2";
+            Description = "placeholder text 2";       
         }
 
 
@@ -46,8 +46,12 @@ namespace Funky_TextGame.Funky_TextGame.AreaCollection
             {
                 //displays combat information and creates the menu every frame
                 string prompt = $@"You have engaged in combat
-Current Health : {myGame.MyDefaultPlayer.CurrentHealth}     Enemy Health :   {myGame.MyEnemy.CurrentHealth}
-        Damage : {myGame.MyDefaultPlayer.Damage}";
+
+    Player          Enemy
+ Level : {myGame.MyDefaultPlayer.Level}      Level  :   {myGame.MyEnemy.Level}
+Health : {myGame.MyDefaultPlayer.CurrentHealth}     Health :   {myGame.MyEnemy.CurrentHealth}
+Damage : {myGame.MyDefaultPlayer.Damage}    Damage :   {myGame.MyEnemy.Damage}
+Armour : {myGame.MyDefaultPlayer.Armour}     Armour :   {myGame.MyEnemy.Armour}";
                 string[] options = { option1, option2, option3 };
                 Menu mainMenu = new Menu(prompt, options, prompt2);
                 int selectedIndex = mainMenu.Run();
@@ -122,7 +126,7 @@ Current Health : {myGame.MyDefaultPlayer.CurrentHealth}     Enemy Health :   {my
             {
                 myGame.MyCharacterList[i].LifeCheck();
             }
-            WriteLine("\nyou have " + myGame.MyDefaultPlayer.Exp + "/" + myGame.MyDefaultPlayer.ReqExp + " exp");
+            
         }
 
 

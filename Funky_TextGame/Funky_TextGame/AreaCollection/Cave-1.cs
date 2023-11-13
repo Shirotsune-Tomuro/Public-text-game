@@ -14,7 +14,7 @@ namespace Funky_TextGame.Funky_TextGame.AreaCollection
         public Cave1(Game Game) : base(Game)
         {
             Name = "Cave - 1";
-            Description = "A dark dank cave";
+            Description = "A dark dank cave";            
         }
 
         public override void Run()
@@ -35,7 +35,5 @@ namespace Funky_TextGame.Funky_TextGame.AreaCollection
             Utilities.KeyEntry();
             myGame.MyMainMenu.Run();
         }
-
-
     }
 }

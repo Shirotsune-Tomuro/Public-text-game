@@ -15,21 +15,19 @@ namespace Funky_TextGame.CharacterList
         {
             //Constructor for the player character
             Description = "You the player";
-            Level = 14;
+            Level = 50;
             Armour = 0;
-            StrengthStat = 6;
-            DexterityStat = 10;
-            ManaStat = 10;
-            HealthStat = 15;
-            Damage = (int)(StrengthStat * Level);
-            MaxHealth = (int)(HealthStat * Level);
-            CurrentHealth = MaxHealth;
+            StrengthStat -= 6;            
+            HealthStat -= 5;                 
             Exp = 0;
             ReqExp = 100;
             MaxArmour = 10;
-
-        }    
-        
+            HealthGrowth = 1;
+            StrengthGrowth = 2;
+            ArmourGrowth = 7;             
+            StatAdjustments();
+            LevelAdjustments();
+        }          
 
         public void BasicAttack()
         {
@@ -56,7 +54,7 @@ namespace Funky_TextGame.CharacterList
         }
         public void Defend()
         {
-            Armour += 5;
+            Armour += 5 * Level;
 
             if (Armour > MaxArmour)
             {
@@ -75,30 +73,7 @@ namespace Funky_TextGame.CharacterList
             {
                 WriteLine("\nThis is game over, please exit the console to play again");
             }
-        }     
-        private void LevelCheck()
-        {
-            if (Exp >= ReqExp)
-            {   
-                Exp = 0;   
-                Level += 1;          
-                WriteLine("\nYou have reached level " + Level + ". Congratulations!");                
-                ReqExp = (int)(ReqExp * 1.5);                
-                LevelUp();
-            }            
-        }
-        private void LevelUp()
-        {
-            
-            HealthStat += 1;
-            StrengthStat += 2;
-            Armour += 4;
-            MaxArmour += 4;
-            CurrentHealth = MaxHealth;
-            
-        }
-
-
+        }          
 
     }
 }

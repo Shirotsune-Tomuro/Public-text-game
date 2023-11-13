@@ -15,19 +15,21 @@ namespace Funky_TextGame.CharacterList
 
         public String Name = "";
         public String Description = "";
-        public int StrengthStat = 0;
+        public int StrengthStat = 10;
         public int WeaponPower = 0;
-        public int Damage = 0;
-        public int DexterityStat = 0;
-        public int ManaStat = 0;
-        public int HealthStat = 0;
+        public int Damage = 0;        
+        public int HealthStat = 10;
         public int MaxHealth = 0;
         public int CurrentHealth = 0;   
         public int Armour = 0;
         public int Level = 0;
         public int Exp = 0;
         public int ReqExp = 0;
-        public int MaxArmour = 0;     
+        public int MaxArmour = 0;
+        public int HealthGrowth = 0;
+        public int StrengthGrowth = 0;
+        public int ArmourGrowth = 0;
+        public int MaxArmourGrowth = 0;
 
         //all characters pass throught the game class
         public ParentCharacter(Game Game)
@@ -38,6 +40,49 @@ namespace Funky_TextGame.CharacterList
         virtual public void LifeCheck()
         {
 
+        }
+        protected void LevelAdjustments()
+        {
+            for (int i = 1; i < Level; i++)
+            {
+                LevelUp();
+            }
+        }
+        virtual protected void StatAdjustments()
+        {
+            Damage = (int)(StrengthStat * 10);
+            MaxHealth = (int)(HealthStat * 10);
+            CurrentHealth = MaxHealth;
+            MaxArmourGrowth = (int)(ArmourGrowth * 1.5);
+        }
+        protected void LevelUp()
+        {
+
+            HealthStat += HealthGrowth;
+            StrengthStat += StrengthGrowth;
+            Armour += ArmourGrowth;
+            MaxArmour += MaxArmourGrowth;
+            StatAdjustments();
+
+        }
+        protected void LevelCheck()
+        {
+            if (Exp >= ReqExp)
+            {
+                do
+                {
+                    Exp -= ReqExp;
+                    Level += 1;
+                    WriteLine("\nYou have reached level " + Level + ". Congratulations!");
+                    ReqExp = (int)(ReqExp * 2.2);
+                    LevelUp();
+
+                } while (Exp >= ReqExp);
+            }
+            else
+            {
+                WriteLine("\nYou have " + Exp + "/" + ReqExp + " Exp");
+            }
         }
     }
 }

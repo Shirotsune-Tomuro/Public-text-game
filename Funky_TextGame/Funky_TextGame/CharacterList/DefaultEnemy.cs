@@ -16,19 +16,26 @@ namespace Funky_TextGame.CharacterList
             var rand = new Random();
             Description = "The enemy";
             Name = "placeholder name";
-            Level = rand.Next(myGame.MyDefaultPlayer.Level - 1, myGame.MyDefaultPlayer.Level + 1);
+            Level = rand.Next(myGame.MyDefaultPlayer.Level - 3, myGame.MyDefaultPlayer.Level + 5);
             Armour = 0;
-            StrengthStat = 2;            
-            DexterityStat = 10;
-            ManaStat = 10;
-            HealthStat = 15;
-            Damage = (int)(StrengthStat * Level * 0.9);
-            MaxHealth = (int)(HealthStat * Level * 1.5);
+            StrengthStat -= 8;              
+            HealthStat += 10;
+            HealthGrowth = 1;
+            StrengthGrowth = 1;
+            ArmourGrowth = 3;
+            
+            Exp = (15 * 10);
+            StatAdjustments();
+            LevelAdjustments();
+        }
+        override protected void StatAdjustments()
+        {
+            Damage = (int)(StrengthStat * 10 * 0.9);
+            MaxHealth = (int)(HealthStat * 10 * 2.5);
             CurrentHealth = MaxHealth;
-            Exp = (15 * Level);
-                                   
-        }       
-        
+            MaxArmourGrowth = (int)(ArmourGrowth * 1.5);
+        }
+
         public void RandomShenanigan()
         {
             var rand = new Random();
@@ -52,7 +59,7 @@ namespace Funky_TextGame.CharacterList
         }
         public void Attack()
         {
-            if (myGame.MyDefaultPlayer.Armour < Damage)
+            if (Damage > myGame.MyDefaultPlayer.Armour )
             {
                 WriteLine("\nThe enemy attacks you");
                 myGame.MyDefaultPlayer.CurrentHealth -= Damage - myGame.MyDefaultPlayer.Armour;
@@ -65,7 +72,7 @@ namespace Funky_TextGame.CharacterList
         public void Defend()
         {
             WriteLine("\nThe enemy takes a defensive posture");
-            Armour += 5;
+            Armour += 5 * 10;
             if (Armour > MaxArmour)
             {
                 Armour = MaxArmour;
