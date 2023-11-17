@@ -20,37 +20,48 @@ namespace Funky_TextGame.CharacterList
             Armour = 0;
             StrengthStat -= 8;              
             HealthStat += 10;
-            HealthGrowth = 1;
+            HealthGrowth = 7;
             StrengthGrowth = 1;
-            ArmourGrowth = 3;
+            ArmourGrowth = 2;
             
-            Exp = (15 * 10);
+            Exp = 15 * Level;
             StatAdjustments();
             LevelAdjustments();
         }
         override protected void StatAdjustments()
         {
-            Damage = (int)(StrengthStat * 10 * 0.9);
-            MaxHealth = (int)(HealthStat * 10 * 2.5);
+            Damage = ((StrengthStat * 10) * 32) / 100;
+            MaxHealth = ((HealthStat * 10) * 173) / 100;
             CurrentHealth = MaxHealth;
-            MaxArmourGrowth = (int)(ArmourGrowth * 1.5);
+            MaxArmourGrowth = (ArmourGrowth * 2);
+            Exp = (Exp * 135) / 100;
+
+            if (Level >= LevelCapstone)
+            {
+                HealthGrowth += 3;
+                ArmourGrowth += 1;                
+                LevelCapstone += 10;
+            }
+        
         }
 
         public void RandomShenanigan()
         {
             var rand = new Random();
             int SelectedIndex = 0;
-            SelectedIndex = rand.Next(4);
+            SelectedIndex = rand.Next(5);
 
             switch (SelectedIndex) 
             {
-                case 1:
+                case 1 :
+                case 2 :
+                case 3 :
                     Attack();
-                break;
-                case 2:
+                break;          
+                case 4:
                     Defend();
                 break;
-                case 3:
+                case 5:
                     Flee();
                 break;
                 default:
@@ -79,7 +90,7 @@ namespace Funky_TextGame.CharacterList
             }
         }
         public void Flee()
-        {
+        {            
             WriteLine("\nThe enemy attempts to flee. However, the ability to flee is not implemented so you get a free action. Lucky you.");
         }
 

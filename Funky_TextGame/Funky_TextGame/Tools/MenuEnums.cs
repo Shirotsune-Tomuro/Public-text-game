@@ -10,6 +10,7 @@ namespace Funky_TextGame
     {
         attack,
         defend,
+        heal,
         flee
     }
 
@@ -17,6 +18,5 @@ namespace Funky_TextGame
     {
         BasicAttack,
         HeavyAttack
-    }
-   
+    }      
 }

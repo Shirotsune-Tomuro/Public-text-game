@@ -30,6 +30,10 @@ namespace Funky_TextGame.CharacterList
         public int StrengthGrowth = 0;
         public int ArmourGrowth = 0;
         public int MaxArmourGrowth = 0;
+        public int HealAmount = 0;
+        public int Mana = 100;
+        public int MaxMana = 100;
+        public int LevelCapstone = 10;
 
         //all characters pass throught the game class
         public ParentCharacter(Game Game)
@@ -50,18 +54,19 @@ namespace Funky_TextGame.CharacterList
         }
         virtual protected void StatAdjustments()
         {
-            Damage = (int)(StrengthStat * 10);
-            MaxHealth = (int)(HealthStat * 10);
+            Damage = ((StrengthStat * 10) * 113) / 100;
+            MaxHealth = ((HealthStat * 10) * 102) / 100;
             CurrentHealth = MaxHealth;
-            MaxArmourGrowth = (int)(ArmourGrowth * 1.5);
+            MaxArmourGrowth = ArmourGrowth * 1;
+            HealAmount = (MaxHealth * 35) / 100;
         }
         protected void LevelUp()
-        {
-
+        {            
             HealthStat += HealthGrowth;
             StrengthStat += StrengthGrowth;
             Armour += ArmourGrowth;
             MaxArmour += MaxArmourGrowth;
+            ReqExp = (ReqExp * 175) / 100;
             StatAdjustments();
 
         }
@@ -73,8 +78,7 @@ namespace Funky_TextGame.CharacterList
                 {
                     Exp -= ReqExp;
                     Level += 1;
-                    WriteLine("\nYou have reached level " + Level + ". Congratulations!");
-                    ReqExp = (int)(ReqExp * 2.2);
+                    WriteLine("\nYou have reached level " + Level + ". Congratulations!");                    
                     LevelUp();
 
                 } while (Exp >= ReqExp);

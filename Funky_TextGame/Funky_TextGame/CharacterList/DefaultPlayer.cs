@@ -1,32 +1,27 @@
-﻿using Funky_TextGame.AreaCollection;
-using Funky_TextGame.StartFunctions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Funky_TextGame.StartFunctions;
 using static System.Console;
 
 namespace Funky_TextGame.CharacterList
 {
     class DefaultPlayer : ParentCharacter
-    {
+    {        
         public DefaultPlayer(Game Game) : base(Game)
         {
             //Constructor for the player character
             Description = "You the player";
-            Level = 50;
+            Level = 99;
             Armour = 0;
             StrengthStat -= 6;            
             HealthStat -= 5;                 
             Exp = 0;
             ReqExp = 100;
             MaxArmour = 10;
-            HealthGrowth = 1;
+            HealthGrowth = 3;
             StrengthGrowth = 2;
-            ArmourGrowth = 7;             
-            StatAdjustments();
+            ArmourGrowth = 2;            
+
             LevelAdjustments();
+            StatAdjustments();
         }          
 
         public void BasicAttack()
@@ -42,10 +37,10 @@ namespace Funky_TextGame.CharacterList
         }
         public void HeavyAttack()
         {
-            if (myGame.MyEnemy.Armour < Damage * 2)
+            if (myGame.MyEnemy.Armour < (Damage * 250) / 100)
             {
                 myGame.MyEnemy.CurrentHealth -= Damage * 2 - myGame.MyEnemy.Armour;
-                CurrentHealth -= myGame.MyEnemy.Damage / 2;
+                CurrentHealth -= (myGame.MyEnemy.Damage * 35) / 100;
             }
             else
             {
@@ -61,17 +56,36 @@ namespace Funky_TextGame.CharacterList
                 Armour = MaxArmour;
             }
         }
+        public void Heal()
+        {
+            if (Mana > 15)
+            {                
+                CurrentHealth = CurrentHealth + HealAmount;
+                Mana -= 15;
+
+                if (CurrentHealth >= MaxHealth)
+                {
+                    CurrentHealth = MaxHealth;
+                }
+            }
+            else
+            {
+                WriteLine("Insufficient Mana");
+            }
+        }
 
         public override void LifeCheck()
         {
             if (CurrentHealth > 0)
             {
-                WriteLine("\nCongratulations on your victory");
+                Utilities.Delay("\nCongratulations on your victory");
                 LevelCheck();
             }
             else
             {
-                WriteLine("\nThis is game over, please exit the console to play again");
+                Utilities.Delay("\nThis is game over, you have failed your quest. The console will now close.");
+                Utilities.Delay("\nPlease try again warrior");               
+                Utilities.ExitConsole();
             }
         }          
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Funky_TextGame.Funky_TextGame.Tools;
 using Funky_TextGame.StartFunctions;
 using static System.Console;
 

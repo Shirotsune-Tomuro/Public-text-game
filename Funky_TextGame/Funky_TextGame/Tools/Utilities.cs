@@ -27,7 +27,7 @@ namespace Funky_TextGame
             foreach (char c in Text)
             {
                 Console.Write(c);
-                Thread.Sleep(20);
+                Thread.Sleep(40);
             }            
         }
     }
