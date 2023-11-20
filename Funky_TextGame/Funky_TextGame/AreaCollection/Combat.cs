@@ -46,7 +46,7 @@ namespace Funky_TextGame.Funky_TextGame.AreaCollection
  Level : {myGame.MyDefaultPlayer.Level}      Level  :   {myGame.MyEnemy.Level}
 Health : {myGame.MyDefaultPlayer.CurrentHealth}     Health :   {myGame.MyEnemy.CurrentHealth}
 Damage : {myGame.MyDefaultPlayer.Damage}    Damage :   {myGame.MyEnemy.Damage}
-Armour : {myGame.MyDefaultPlayer.Armour}     Armour :   {myGame.MyEnemy.Armour}
+Armour : {myGame.MyDefaultPlayer.Armor}     Armour :   {myGame.MyEnemy.Armor}
   Mana : {myGame.MyDefaultPlayer.Mana}";
                 string[] options = { option1, option2, option3, option4};
                 Menu mainMenu = new Menu(prompt, options, prompt2);

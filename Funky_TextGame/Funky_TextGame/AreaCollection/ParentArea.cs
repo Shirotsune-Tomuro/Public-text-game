@@ -15,7 +15,8 @@ namespace Funky_TextGame.AreaCollection
         protected Game myGame;
 
         public String Name = "";
-        public String Description = "";       
+        public String Description = "";  
+        protected bool Completed = false;
 
         //all levels pass throught the game class
         public Area(Game Game)

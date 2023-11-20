@@ -4,21 +4,22 @@ using static System.Console;
 namespace Funky_TextGame.CharacterList
 {
     class DefaultPlayer : ParentCharacter
-    {        
+    {   
+        public bool KeyHeld = false;
         public DefaultPlayer(Game Game) : base(Game)
         {
             //Constructor for the player character
             Description = "You the player";
-            Level = 99;
-            Armour = 0;
+            Level = 1;
+            Armor = 0;
             StrengthStat -= 6;            
             HealthStat -= 5;                 
             Exp = 0;
             ReqExp = 100;
-            MaxArmour = 10;
+            MaxArmor = 10;
             HealthGrowth = 3;
             StrengthGrowth = 2;
-            ArmourGrowth = 2;
+            ArmorGrowth = 2;
 
             string Name;
 
@@ -28,9 +29,9 @@ namespace Funky_TextGame.CharacterList
 
         public void BasicAttack()
         {
-            if (myGame.MyEnemy.Armour < Damage)
+            if (myGame.MyEnemy.Armor < Damage)
             {
-                myGame.MyEnemy.CurrentHealth -= Damage - myGame.MyEnemy.Armour;
+                myGame.MyEnemy.CurrentHealth -= Damage - myGame.MyEnemy.Armor;
             }
             else
             {
@@ -39,9 +40,9 @@ namespace Funky_TextGame.CharacterList
         }
         public void HeavyAttack()
         {
-            if (myGame.MyEnemy.Armour < (Damage * 250) / 100)
+            if (myGame.MyEnemy.Armor < (Damage * 250) / 100)
             {
-                myGame.MyEnemy.CurrentHealth -= Damage * 2 - myGame.MyEnemy.Armour;
+                myGame.MyEnemy.CurrentHealth -= Damage * 2 - myGame.MyEnemy.Armor;
                 CurrentHealth -= (myGame.MyEnemy.Damage * 35) / 100;
             }
             else
@@ -51,18 +52,18 @@ namespace Funky_TextGame.CharacterList
         }
         public void Defend()
         {
-            Armour += 5 * Level;
+            Armor += 5 * Level;
 
-            if (Armour > MaxArmour)
+            if (Armor > MaxArmor)
             {
-                Armour = MaxArmour;
+                Armor = MaxArmor;
             }
         }
         public void Heal()
         {
             if (Mana > 15)
             {                
-                CurrentHealth = CurrentHealth + HealAmount;
+                CurrentHealth += HealAmount;
                 Mana -= 15;
 
                 if (CurrentHealth >= MaxHealth)

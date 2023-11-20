@@ -19,6 +19,13 @@ namespace Funky_TextGame.StartFunctions
         public Combat MyCombat;
         public Name_Screen MyNameScreen;
         public Cave1 MyCave1;
+        public Cave_2 MyCave_2;
+        public Forest_1 MyForest_1;
+        public Forest_2 MyForest_2;
+        public Village MyVillage;
+        public Shop MyShop;
+        public Mega_Boss MyMegaBoss;
+        public EndCredits MyEndCredits;
         public List<ParentCharacter> MyCharacterList;
         public DefaultPlayer MyDefaultPlayer;
         public DefaultEnemy MyEnemy;
@@ -31,6 +38,13 @@ namespace Funky_TextGame.StartFunctions
             MyCombat = new Combat(this);
             MyNameScreen = new Name_Screen(this);
             MyCave1 = new Cave1(this);
+            MyCave_2 = new Cave_2(this);
+            MyForest_1 = new Forest_1(this);
+            MyForest_2 = new Forest_2(this);
+            MyVillage = new Village(this);
+            MyShop = new Shop(this);
+            MyMegaBoss = new Mega_Boss(this);
+            MyEndCredits = new EndCredits(this);
             //MyModTools = new ModTools(this);
             MyCharacterList = new List<ParentCharacter>();
             MyDefaultPlayer = new DefaultPlayer(this);

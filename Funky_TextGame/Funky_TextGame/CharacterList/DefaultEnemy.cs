@@ -17,12 +17,14 @@ namespace Funky_TextGame.CharacterList
             Description = "The enemy";
             Name = "placeholder name";
             Level = rand.Next(myGame.MyDefaultPlayer.Level - 3, myGame.MyDefaultPlayer.Level + 5);
-            Armour = 0;
+            Armor = 0;
             StrengthStat -= 8;              
             HealthStat += 10;
             HealthGrowth = 7;
             StrengthGrowth = 1;
-            ArmourGrowth = 2;
+            ArmorGrowth = 2;
+            Gold = 10;
+            GoldGrowth = 1;
             
             Exp = 15 * Level;
             StatAdjustments();
@@ -33,13 +35,13 @@ namespace Funky_TextGame.CharacterList
             Damage = ((StrengthStat * 10) * 32) / 100;
             MaxHealth = ((HealthStat * 10) * 173) / 100;
             CurrentHealth = MaxHealth;
-            MaxArmourGrowth = (ArmourGrowth * 2);
+            MaxArmorGrowth = (ArmorGrowth * 2);
             Exp = (Exp * 135) / 100;
 
             if (Level >= LevelCapstone)
             {
                 HealthGrowth += 3;
-                ArmourGrowth += 1;                
+                ArmorGrowth += 1;                
                 LevelCapstone += 10;
             }
         
@@ -70,10 +72,10 @@ namespace Funky_TextGame.CharacterList
         }
         public void Attack()
         {
-            if (Damage > myGame.MyDefaultPlayer.Armour )
+            if (Damage > myGame.MyDefaultPlayer.Armor )
             {
                 WriteLine("\nThe enemy attacks you");
-                myGame.MyDefaultPlayer.CurrentHealth -= Damage - myGame.MyDefaultPlayer.Armour;
+                myGame.MyDefaultPlayer.CurrentHealth -= Damage - myGame.MyDefaultPlayer.Armor;
             }
             else
             {
@@ -83,10 +85,10 @@ namespace Funky_TextGame.CharacterList
         public void Defend()
         {
             WriteLine("\nThe enemy takes a defensive posture");
-            Armour += 5 * 10;
-            if (Armour > MaxArmour)
+            Armor += 5 * 10;
+            if (Armor > MaxArmor)
             {
-                Armour = MaxArmour;
+                Armor = MaxArmor;
             }
         }
         public void Flee()
