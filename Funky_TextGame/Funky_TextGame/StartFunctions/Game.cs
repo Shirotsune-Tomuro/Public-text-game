@@ -17,24 +17,26 @@ namespace Funky_TextGame.StartFunctions
         public MainMenu MyMainMenu;
         public About MyAbout;
         public Combat MyCombat;
+        public Name_Screen MyNameScreen;
         public Cave1 MyCave1;
         public List<ParentCharacter> MyCharacterList;
         public DefaultPlayer MyDefaultPlayer;
         public DefaultEnemy MyEnemy;
-        public ModTools MyModTools;
+        //public ModTools MyModTools;
 
         public Game()
         {
             MyMainMenu = new MainMenu (this);
             MyAbout = new About(this);
             MyCombat = new Combat(this);
+            MyNameScreen = new Name_Screen(this);
             MyCave1 = new Cave1(this);
-            MyModTools = new ModTools(this);
+            //MyModTools = new ModTools(this);
             MyCharacterList = new List<ParentCharacter>();
             MyDefaultPlayer = new DefaultPlayer(this);
             MyCharacterList.Add(MyDefaultPlayer);
 
-            Task inputTask = Task.Run(MyModTools.ActivateCmdLine);
+            //Task inputTask = Task.Run(MyModTools.ActivateCmdLine);
 
         } 
         //Spawns an enemy when invoked

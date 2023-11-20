@@ -14,12 +14,8 @@ namespace Funky_TextGame.AreaCollection
         {
              Name = "About page";
              Description = "Provides information about the game and its developer";
-        }
-        public override void Run()
-        {
-            RunAbout();
-        }
-        private void RunAbout()
+        }      
+        override protected void Start()
         {       
 
             Clear();
@@ -28,11 +24,9 @@ namespace Funky_TextGame.AreaCollection
                                   "During this project i had learned many things as i had limited foundational knowledge \n" +
                                   "Not only have I learned much about programming, but also about code formatting and keeping things tidy\n" +
                                   "I hope this project will not only allow a glimpse into what i have learned this semester\n" +
-                                  "but also allow you to have a bit of fun :D" +
-                                  "\n\n");
+                                  "but also allow you to have a bit of fun.");
             Thread.Sleep(1000);
-            WriteLine("Press any key to return");
-            ReadKey(true);
+            Utilities.KeyEntry();
             Clear();
             myGame.MyMainMenu.Run();
         }

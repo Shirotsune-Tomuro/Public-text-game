@@ -11,7 +11,7 @@ namespace Funky_TextGame
     {
         public static void KeyEntry()
         {
-            WriteLine("(Press any key to continue)");
+            WriteLine("\n(Press any key to continue)");
             ReadKey(true);
 
         }

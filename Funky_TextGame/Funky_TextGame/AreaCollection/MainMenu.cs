@@ -15,14 +15,7 @@ namespace Funky_TextGame.AreaCollection
             Name = "MainMenu";
             Description = "This is the MainMenu";
         }
-
-
-        public override void Run()
-        {
-            RunMainMenu();            
-        }
-
-        private void RunMainMenu()
+        override protected void Start()
         {            
             string prompt = "Welcome to Funky Text Game, What would you like to do?\n";
             string prompt2 = "";
@@ -33,7 +26,7 @@ namespace Funky_TextGame.AreaCollection
             switch (selectedIndex)
             {
                 case 0:
-                    myGame.MyCave1.Run();
+                    myGame.MyNameScreen.Run();
                     break;
                 case 1:
                     myGame.MyAbout.Run();

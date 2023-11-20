@@ -28,13 +28,7 @@ namespace Funky_TextGame.Funky_TextGame.AreaCollection
             Name = "placeholder text";
             Description = "placeholder text 2";       
         }
-
-
-        public override void Run()
-        {
-            CombatSetup();
-        }
-        private void CombatSetup()
+        override protected void Start()
         {
             //spawns an enemy from the game class and then strats combat            
             myGame.SpawnCharacters();                        

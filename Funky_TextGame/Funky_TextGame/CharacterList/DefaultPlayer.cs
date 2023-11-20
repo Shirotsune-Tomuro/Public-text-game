@@ -18,7 +18,9 @@ namespace Funky_TextGame.CharacterList
             MaxArmour = 10;
             HealthGrowth = 3;
             StrengthGrowth = 2;
-            ArmourGrowth = 2;            
+            ArmourGrowth = 2;
+
+            string Name;
 
             LevelAdjustments();
             StatAdjustments();
