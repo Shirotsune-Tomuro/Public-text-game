@@ -27,7 +27,9 @@ namespace Funky_TextGame.AreaCollection
 | )      | (___) || )  \  ||  /  \ \   | |        | |   | (____/\( /   \ )   | |     | (___) || )   ( || )   ( || (____/\
 |/       (_______)|/    )_)|_/    \/   \_/        )_(   (_______/|/     \|   )_(     (_______)|/     \||/     \|(_______/
                                                                                                                          ";
-            string prompt2 = "Menu controls : [Up]  [Down]  [Enter]";
+            string prompt2 = "Menu controls : [Up]  [Down]  [Enter]" +
+                "\n\n" +
+                "Press [Home] during any menu to open the CmdLine (It's useful) ";
             string[] options = { "play", "About", "Exit" };
             Menu mainMenu = new Menu(prompt, options, prompt2, myGame);
             int selectedIndex = mainMenu.Run();

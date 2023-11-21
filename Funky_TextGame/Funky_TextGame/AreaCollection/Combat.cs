@@ -20,6 +20,7 @@ namespace Funky_TextGame.Funky_TextGame.AreaCollection
         string option2 = "Defend";
         string option3 = "Heal";
         string option4 = "flee";
+        string option5 = "";
         bool AttackMenu = false;
         public int LogLength = 0;
         //Allows all information access through the "Game Class"
@@ -43,12 +44,12 @@ namespace Funky_TextGame.Funky_TextGame.AreaCollection
                 string prompt = $@"You have engaged in combat
 
     {myGame.MyDefaultPlayer.Name}          Enemy
- Level : {myGame.MyDefaultPlayer.Level}      Level  :   {myGame.MyEnemy.Level}
+Level : {myGame.MyDefaultPlayer.Level}      Level  :   {myGame.MyEnemy.Level}
 Health : {myGame.MyDefaultPlayer.CurrentHealth}     Health :   {myGame.MyEnemy.CurrentHealth}
 Damage : {myGame.MyDefaultPlayer.Damage}    Damage :   {myGame.MyEnemy.Damage}
-Armour : {myGame.MyDefaultPlayer.Armor}     Armour :   {myGame.MyEnemy.Armor}
-  Mana : {myGame.MyDefaultPlayer.Mana}";
-                string[] options = { option1, option2, option3, option4 };
+Armor : {myGame.MyDefaultPlayer.Armor}     Armor :   {myGame.MyEnemy.Armor}
+Mana : {myGame.MyDefaultPlayer.Mana}";
+                string[] options = { option1, option2, option3, option4, option5 };
                 Menu mainMenu = new Menu(prompt, options, prompt2, myGame);
                 int selectedIndex = mainMenu.Run();
 
@@ -64,6 +65,7 @@ Armour : {myGame.MyDefaultPlayer.Armor}     Armour :   {myGame.MyEnemy.Armor}
                                 option2 = "Charging BLow (Req Lvl 5)";
                                 option3 = "Blazing Strike (Req Lvl 10)";
                                 option4 = "Sorcery : Blood Sacrifice (Req Lvl 25)";
+                                option5 = "Armor Crush";
                                 AttackMenu = true;
                             }
                             break;
@@ -112,6 +114,11 @@ Armour : {myGame.MyDefaultPlayer.Armor}     Armour :   {myGame.MyEnemy.Armor}
                                 myGame.MyDefaultPlayer.SuperMove();
                             }
                             break;
+                        case (int)AttackOptions.ArmorCrush:
+                            {
+                                myGame.MyDefaultPlayer.ArmorCrush();
+                            }
+                            break;
                         default:
                             break;
 
@@ -122,6 +129,7 @@ Armour : {myGame.MyDefaultPlayer.Armor}     Armour :   {myGame.MyEnemy.Armor}
                     option2 = "Defend";
                     option3 = "Heal";
                     option4 = "Flee";
+                    option5 = "";
                 }
                 //mana regen for the player
                 myGame.MyDefaultPlayer.Mana += 5;

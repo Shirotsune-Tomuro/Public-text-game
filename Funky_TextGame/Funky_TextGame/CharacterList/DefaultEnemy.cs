@@ -108,7 +108,7 @@ namespace Funky_TextGame.CharacterList
         {
             myGame.MyCombat.prompt2 = myGame.MyCombat.prompt2 + "\nThe enemy takes a defensive posture";
             myGame.MyCombat.LogLength++;
-            Armor += 5 * Level;
+            Armor += 5 * (Level / 2);
             if (Armor > MaxArmor)
             {
                 Armor = MaxArmor;

@@ -61,7 +61,7 @@ namespace Funky_TextGame.StartFunctions
         // which level the game will start on
         public void Start()
         {
-            MyMainMenu.Run();
+            MyCombat.Run();
         }
     }
 }

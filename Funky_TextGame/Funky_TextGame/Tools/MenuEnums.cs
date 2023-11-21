@@ -19,6 +19,7 @@ namespace Funky_TextGame
         BasicAttack,
         HeavyAttack,
         BlazingStrike,
-        SuperMove
+        SuperMove,
+        ArmorCrush
     }      
 }

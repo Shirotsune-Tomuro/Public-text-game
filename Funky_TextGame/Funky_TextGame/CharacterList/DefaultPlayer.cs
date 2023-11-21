@@ -10,7 +10,7 @@ namespace Funky_TextGame.CharacterList
         {
             //Constructor for the player character
             Description = "You the player";
-            Level = 1;
+            Level = 99;
             Armor = 0;
             StrengthStat -= 6;
             HealthStat -= 5;
@@ -156,7 +156,7 @@ namespace Funky_TextGame.CharacterList
         {
             myGame.MyCombat.prompt2 = myGame.MyCombat.prompt2 + "\nYou disrupt the enemy defensive stance";
             myGame.MyCombat.LogLength++;
-            myGame.MyEnemy.Armor *= 20 / 100;
+            myGame.MyEnemy.Armor -= (myGame.MyEnemy.Armor * 60) / 100;
         }
 
         //checks if the player is alive
