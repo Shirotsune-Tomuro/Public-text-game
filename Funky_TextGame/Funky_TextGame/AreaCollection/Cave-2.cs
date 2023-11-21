@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace Funky_TextGame.Funky_TextGame.AreaCollection
 {
     internal class Cave_2 : Area
-    {       
+    {
         public Cave_2(Game Game) : base(Game)
         {
             Name = "Cave - 2";
@@ -22,7 +22,6 @@ There is a sign on the groud with a message written on it
 
 ""Dev Note - this place is designed to test your skill in combat
 do not enter this place recklessly""");
-
             Utilities.KeyEntry();
 
             do
@@ -30,23 +29,23 @@ do not enter this place recklessly""");
                 string prompt = "Do you wish to continue?";
                 string prompt2 = "";
                 string[] options = { "Yes", "No" };
-                Menu mainMenu = new Menu(prompt, options, prompt2);
+                Menu mainMenu = new Menu(prompt, options, prompt2, myGame);
                 int selectedIndex = mainMenu.Run();
 
                 switch (selectedIndex)
                 {
                     case 0:
-                        {                           
+                        {
                             myGame.MyCombat.Run();
                         }
                         break;
                     case 1:
-                        {                            
+                        {
                             myGame.MyCave1.Run();
                         }
                         break;
                 }
-            }while (true);
+            } while (true);
 
         }
     }

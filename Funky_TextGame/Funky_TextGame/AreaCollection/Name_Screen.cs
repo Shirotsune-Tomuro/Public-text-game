@@ -27,13 +27,14 @@ Before we get into the main game, please name yourself" + "\n\n");
             do
             {
                 CursorVisible = true;
+                Write(">> ");
                 myGame.MyDefaultPlayer.Name = ReadLine();
                 CursorVisible = false;
 
                 string prompt = myGame.MyDefaultPlayer.Name + " Is it?";
                 string prompt2 = "";
                 string[] options = { "Yes", "No" };
-                Menu mainMenu = new Menu(prompt, options, prompt2);
+                Menu mainMenu = new Menu(prompt, options, prompt2, myGame);
                 int selectedIndex = mainMenu.Run();
 
                 switch (selectedIndex)

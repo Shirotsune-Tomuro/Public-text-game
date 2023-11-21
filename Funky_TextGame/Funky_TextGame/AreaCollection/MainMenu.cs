@@ -17,10 +17,19 @@ namespace Funky_TextGame.AreaCollection
         }
         override protected void Start()
         {            
-            string prompt = "Welcome to Funky Text Game, What would you like to do?\n";
-            string prompt2 = "";
+            string prompt = @"
+ _______           _        _                  _________ _______          _________   _______  _______  _______  _______ 
+(  ____ \|\     /|( (    /|| \    /\|\     /|  \__   __/(  ____ \|\     /|\__   __/  (  ____ \(  ___  )(       )(  ____ \
+| (    \/| )   ( ||  \  ( ||  \  / /( \   / )     ) (   | (    \/( \   / )   ) (     | (    \/| (   ) || () () || (    \/
+| (__    | |   | ||   \ | ||  (_/ /  \ (_) /      | |   | (__     \ (_) /    | |     | |      | (___) || || || || (__    
+|  __)   | |   | || (\ \) ||   _ (    \   /       | |   |  __)     ) _ (     | |     | | ____ |  ___  || |(_)| ||  __)   
+| (      | |   | || | \   ||  ( \ \    ) (        | |   | (       / ( ) \    | |     | | \_  )| (   ) || |   | || (      
+| )      | (___) || )  \  ||  /  \ \   | |        | |   | (____/\( /   \ )   | |     | (___) || )   ( || )   ( || (____/\
+|/       (_______)|/    )_)|_/    \/   \_/        )_(   (_______/|/     \|   )_(     (_______)|/     \||/     \|(_______/
+                                                                                                                         ";
+            string prompt2 = "Menu controls : [Up]  [Down]  [Enter]";
             string[] options = { "play", "About", "Exit" };
-            Menu mainMenu = new Menu(prompt, options, prompt2);
+            Menu mainMenu = new Menu(prompt, options, prompt2, myGame);
             int selectedIndex = mainMenu.Run();
 
             switch (selectedIndex)

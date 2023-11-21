@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Funky_TextGame.StartFunctions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,13 +10,17 @@ namespace Funky_TextGame
 {
     internal class Menu
     {
+        protected Game myGame;
+    
         private int selectedIndex;
         private string[] Options;
         private string Prompt;
         private string Prompt2;
 
-        public Menu(string prompt, string[] options, string prompt2)
-        {
+       
+        public Menu(string prompt, string[] options, string prompt2, Game Game)
+        {            
+            myGame = Game;
             Prompt = prompt;
             Prompt2 = prompt2;
             Options = options;
@@ -67,7 +72,7 @@ namespace Funky_TextGame
                 Key = keyInfo.Key;
 
                 if (Key == ConsoleKey.UpArrow)
-                {                    
+                {
                     selectedIndex--;
                     if (selectedIndex == -1)
                     {
@@ -76,13 +81,17 @@ namespace Funky_TextGame
 
                 }
                 else if (Key == ConsoleKey.DownArrow)
-                {                   
+                {
                     selectedIndex++;
                     if (selectedIndex == Options.Length)
                     {
                         selectedIndex = 0;
                     }
 
+                }
+                else if (Key == ConsoleKey.Home)
+                {
+                    myGame.MyModTools.CmdLine();
                 }
 
             } while (Key != ConsoleKey.Enter);

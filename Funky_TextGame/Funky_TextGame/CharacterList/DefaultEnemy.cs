@@ -11,24 +11,37 @@ namespace Funky_TextGame.CharacterList
 {
     class DefaultEnemy : ParentCharacter
     {
+        int GenNum;
         public DefaultEnemy(Game Game) : base(Game)
-        {
-            var rand = new Random();
+        {            
             Description = "The enemy";
             Name = "placeholder name";
-            Level = rand.Next(myGame.MyDefaultPlayer.Level - 3, myGame.MyDefaultPlayer.Level + 5);
+
+            GenerateNum();
+            Level = GenNum;
             Armor = 0;
-            StrengthStat -= 8;              
+            StrengthStat -= 8;
             HealthStat += 10;
             HealthGrowth = 7;
             StrengthGrowth = 1;
             ArmorGrowth = 2;
             Gold = 10;
             GoldGrowth = 1;
-            
+
             Exp = 15 * Level;
             StatAdjustments();
             LevelAdjustments();
+        }
+
+        private void GenerateNum()
+        {            
+            var rand = new Random();
+            GenNum = rand.Next(myGame.MyDefaultPlayer.Level - 3, myGame.MyDefaultPlayer.Level + 5);
+
+            if (GenNum <= 0) 
+            {
+                GenNum = 1;
+            }
         }
         override protected void StatAdjustments()
         {
@@ -41,59 +54,76 @@ namespace Funky_TextGame.CharacterList
             if (Level >= LevelCapstone)
             {
                 HealthGrowth += 3;
-                ArmorGrowth += 1;                
+                ArmorGrowth += 1;
                 LevelCapstone += 10;
             }
-        
+
         }
 
         public void RandomShenanigan()
         {
-            var rand = new Random();
-            int SelectedIndex = 0;
-            SelectedIndex = rand.Next(5);
-
-            switch (SelectedIndex) 
+            if (Damage >= myGame.MyDefaultPlayer.Armor)
             {
-                case 1 :
-                case 2 :
-                case 3 :
-                    Attack();
-                break;          
-                case 4:
-                    Defend();
-                break;
-                case 5:
-                    Flee();
-                break;
-                default:
-                break;
+                var rand = new Random();
+                int SelectedIndex = 0;
+                SelectedIndex = rand.Next(5);
+
+                switch (SelectedIndex)
+                {
+                    case 1:
+                    case 2:
+                    case 3:
+                        Attack();
+                        break;
+                    case 4:
+                        Defend();
+                        break;
+                    case 5:
+                        Flee();
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else
+            {
+                ArmorCrush();
             }
         }
-        public void Attack()
+        private void Attack()
         {
-            if (Damage > myGame.MyDefaultPlayer.Armor )
+            if (Damage > myGame.MyDefaultPlayer.Armor)
             {
-                WriteLine("\nThe enemy attacks you");
+                myGame.MyCombat.prompt2 = myGame.MyCombat.prompt2 + "\nThe enemy attacks you";
+                myGame.MyCombat.LogLength++;
                 myGame.MyDefaultPlayer.CurrentHealth -= Damage - myGame.MyDefaultPlayer.Armor;
             }
             else
             {
-                WriteLine("\nYou defend against the enemy's attack");
+                myGame.MyCombat.prompt2 = myGame.MyCombat.prompt2 + "\nYou defend against the enemy's attack";
+                myGame.MyCombat.LogLength++;
             }
         }
-        public void Defend()
+        private void Defend()
         {
-            WriteLine("\nThe enemy takes a defensive posture");
-            Armor += 5 * 10;
+            myGame.MyCombat.prompt2 = myGame.MyCombat.prompt2 + "\nThe enemy takes a defensive posture";
+            myGame.MyCombat.LogLength++;
+            Armor += 5 * Level;
             if (Armor > MaxArmor)
             {
                 Armor = MaxArmor;
             }
         }
-        public void Flee()
-        {            
-            WriteLine("\nThe enemy attempts to flee. However, the ability to flee is not implemented so you get a free action. Lucky you.");
+        private void Flee()
+        {
+            myGame.MyCombat.prompt2 = myGame.MyCombat.prompt2 + "\nThe enemy attempts to flee. However, the ability to flee is not implemented so you get a free action. Lucky you.";
+            myGame.MyCombat.LogLength++;
+        }
+        private void ArmorCrush()
+        {
+            myGame.MyCombat.prompt2 = myGame.MyCombat.prompt2 + "\nThe Crushes your defenses";
+            myGame.MyCombat.LogLength++;
+            myGame.MyDefaultPlayer.Armor *= 70 / 100;
         }
 
         public override void LifeCheck()
@@ -104,8 +134,9 @@ namespace Funky_TextGame.CharacterList
 
             }
             else
-            {               
+            {
                 myGame.MyDefaultPlayer.Exp += Exp;
+                myGame.MyDefaultPlayer.Gold += Gold;
             }
         }
     }

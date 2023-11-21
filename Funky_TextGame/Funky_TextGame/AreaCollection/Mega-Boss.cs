@@ -6,11 +6,12 @@ using System.ComponentModel.Design;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Console;
 
 namespace Funky_TextGame.Funky_TextGame.AreaCollection
 {
     internal class Mega_Boss : Area
-    {       
+    {
         public Mega_Boss(Game Game) : base(Game)
         {
             Name = "Mega Boss";
@@ -19,6 +20,7 @@ namespace Funky_TextGame.Funky_TextGame.AreaCollection
 
         protected override void Start()
         {
+            Clear();
             if (Completed == false)
             {
                 Utilities.Delay($@"You Approach a wooden door with a note attached.
@@ -31,7 +33,7 @@ As such, this door is locked until you can prove yourself.""");
                 string prompt = "Do you wish to enter?";
                 string prompt2 = "";
                 string[] options = { "Yes", "No" };
-                Menu mainMenu = new Menu(prompt, options, prompt2);
+                Menu mainMenu = new Menu(prompt, options, prompt2, myGame);
                 int selectedIndex = mainMenu.Run();
 
                 switch (selectedIndex)
@@ -46,6 +48,7 @@ As such, this door is locked until you can prove yourself.""");
                             else
                             {
                                 Utilities.Delay("This door is locked");
+                                Utilities.KeyEntry();
                                 myGame.MyCave1.Run();
                             }
                         }
@@ -55,15 +58,15 @@ As such, this door is locked until you can prove yourself.""");
                             myGame.MyCave1.Run();
                         }
                         break;
-                }                
-            } 
-            else if (Completed == true) 
+                }
+            }
+            else if (Completed == true)
             {
                 Utilities.Delay("You already beat the Boss, there's nothing else to do here");
                 Utilities.KeyEntry();
                 myGame.MyCave1.Run();
             }
-         
+
         }
     }
 }

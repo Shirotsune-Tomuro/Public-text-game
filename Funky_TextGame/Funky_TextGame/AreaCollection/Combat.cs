@@ -13,25 +13,25 @@ using static System.Console;
 namespace Funky_TextGame.Funky_TextGame.AreaCollection
 {
     class Combat : Area
-    { 
+    {
         //sets initiatl promts and options for the menu
-            string prompt2 = "";
-            string option1 = "Attack";
-            string option2 = "Defend";
-            string option3 = "Heal";
-            string option4 = "flee";
-            bool AttackMenu = false;
-            int LogLength = 0;
+        public string prompt2 = "";
+        string option1 = "Attack";
+        string option2 = "Defend";
+        string option3 = "Heal";
+        string option4 = "flee";
+        bool AttackMenu = false;
+        public int LogLength = 0;
         //Allows all information access through the "Game Class"
         public Combat(Game Game) : base(Game)
         {
             Name = "placeholder text";
-            Description = "placeholder text 2";       
+            Description = "placeholder text 2";
         }
         override protected void Start()
         {
             //spawns an enemy from the game class and then strats combat            
-            myGame.SpawnCharacters();                        
+            myGame.SpawnCharacters();
             StartCombat();
         }
 
@@ -42,14 +42,14 @@ namespace Funky_TextGame.Funky_TextGame.AreaCollection
                 //displays combat information and creates the menu every frame
                 string prompt = $@"You have engaged in combat
 
-    Player          Enemy
+    {myGame.MyDefaultPlayer.Name}          Enemy
  Level : {myGame.MyDefaultPlayer.Level}      Level  :   {myGame.MyEnemy.Level}
 Health : {myGame.MyDefaultPlayer.CurrentHealth}     Health :   {myGame.MyEnemy.CurrentHealth}
 Damage : {myGame.MyDefaultPlayer.Damage}    Damage :   {myGame.MyEnemy.Damage}
 Armour : {myGame.MyDefaultPlayer.Armor}     Armour :   {myGame.MyEnemy.Armor}
   Mana : {myGame.MyDefaultPlayer.Mana}";
-                string[] options = { option1, option2, option3, option4};
-                Menu mainMenu = new Menu(prompt, options, prompt2);
+                string[] options = { option1, option2, option3, option4 };
+                Menu mainMenu = new Menu(prompt, options, prompt2, myGame);
                 int selectedIndex = mainMenu.Run();
 
                 if (AttackMenu == false)
@@ -61,29 +61,25 @@ Armour : {myGame.MyDefaultPlayer.Armor}     Armour :   {myGame.MyEnemy.Armor}
                             {
                                 //sets new menu options
                                 option1 = "Slash";
-                                option2 = "Charging Strike";
-                                option3 = " ";
-                                option4 = " ";
+                                option2 = "Charging BLow (Req Lvl 5)";
+                                option3 = "Blazing Strike (Req Lvl 10)";
+                                option4 = "Sorcery : Blood Sacrifice (Req Lvl 25)";
                                 AttackMenu = true;
                             }
                             break;
                         case (int)MenuOptions.defend:
                             {
                                 myGame.MyDefaultPlayer.Defend();
-                                prompt2 = (prompt2 + "\nYou raise your guard");
-                                LogLength++;
                             }
-                            break;                      
+                            break;
                         case (int)MenuOptions.heal:
                             {
                                 myGame.MyDefaultPlayer.Heal();
-                                prompt2 = (prompt2 + "\n You Sip on your healing flask");
-                                LogLength++;
                             }
-                            break;  
+                            break;
                         case (int)MenuOptions.flee:
                             {
-                                prompt2 = (prompt2 + "\nYou Attempt to flee");
+                                prompt2 = (prompt2 + "\nYou Attempt to flee... However, there is no way to flee.");
                                 LogLength++;
                             }
                             break;
@@ -99,15 +95,21 @@ Armour : {myGame.MyDefaultPlayer.Armor}     Armour :   {myGame.MyEnemy.Armor}
                         case (int)AttackOptions.BasicAttack:
                             {
                                 myGame.MyDefaultPlayer.BasicAttack();
-                                prompt2 = (prompt2 + "\nYou slash your opponent");
-                                LogLength++;
                             }
                             break;
                         case (int)AttackOptions.HeavyAttack:
                             {
                                 myGame.MyDefaultPlayer.HeavyAttack();
-                                prompt2 = (prompt2 + "\nYou take a heavy swing at the enemy");
-                                LogLength++;
+                            }
+                            break;
+                        case (int)AttackOptions.BlazingStrike:
+                            {
+                                myGame.MyDefaultPlayer.BlazingStrike();
+                            }
+                            break;
+                        case (int)AttackOptions.SuperMove:
+                            {
+                                myGame.MyDefaultPlayer.SuperMove();
                             }
                             break;
                         default:
@@ -121,13 +123,19 @@ Armour : {myGame.MyDefaultPlayer.Armor}     Armour :   {myGame.MyEnemy.Armor}
                     option3 = "Heal";
                     option4 = "Flee";
                 }
+                //mana regen for the player
+                myGame.MyDefaultPlayer.Mana += 5;
+                if (myGame.MyDefaultPlayer.Mana >= myGame.MyDefaultPlayer.MaxMana)
+                {
+                    myGame.MyDefaultPlayer.Mana = myGame.MyDefaultPlayer.MaxMana;
+                }
                 // Prompts enemy action
                 myGame.MyEnemy.RandomShenanigan();
                 //Resets the prompt to empty every 5 lines
                 ClearLog();
-              //condition for combat to end
+                //condition for combat to end
             } while (myGame.MyDefaultPlayer.CurrentHealth > 0 && myGame.MyEnemy.CurrentHealth > 0);
-            EndCombat();         
+            EndCombat();
 
         }
         private void EndCombat()
@@ -135,21 +143,20 @@ Armour : {myGame.MyDefaultPlayer.Armor}     Armour :   {myGame.MyEnemy.Armor}
             Clear();
             for (int i = 0; i < myGame.MyCharacterList.Count; i++)
             {
-                myGame.MyCharacterList[i].LifeCheck();               
+                myGame.MyCharacterList[i].LifeCheck();
             }
+            prompt2 = "";
+            LogLength = 0;
             Utilities.KeyEntry();
             Clear();
         }
         private void ClearLog()
-        {                       
-                if (LogLength >= 6) 
-                {
-                    prompt2 = " ";
-                    LogLength = 0;
-                }            
+        {
+            if (LogLength >= 6)
+            {
+                prompt2 = " ";
+                LogLength = 0;
+            }
         }
-
-
-
     }
 }

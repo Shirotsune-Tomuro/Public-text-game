@@ -2,9 +2,11 @@
 using Funky_TextGame.StartFunctions;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Console;
 
 namespace Funky_TextGame.Funky_TextGame.AreaCollection
 {
@@ -17,20 +19,17 @@ namespace Funky_TextGame.Funky_TextGame.AreaCollection
         }
         override protected void Start()
         {
+            Clear();
             if (Completed == false)
             {
-                Utilities.Delay(@"Saddened by the lack of a wolf pet, you proceed further through the forest.");
+                Utilities.Delay(@"You reach what appeared to be a village. However there are no people to be seen.");
                 Utilities.KeyEntry();
 
-                Utilities.Delay(@"
-You spot what appears to be a path and begin to follow it, hoping there might be a village or atleast another person.
-Though as if you were cursed to have poor luck, a Thief has appeared on the path");
+                Utilities.Delay(@"The cry of a woman rings from the vilage square. There is a large ogre thrashing aroun a large club, destroying everything in sight.
+A villager can be seen quickly closing their window, it seems they have all locked themselves in their homes.");
                 Utilities.KeyEntry();
 
-                Utilities.Delay(@"
-""Ooh a traveller i see. Must be my lucky day""
-
-You raise your fists to for the oncoming battle");
+                Utilities.Delay(@"""Grog hungry!!!""");
                 Utilities.KeyEntry();
 
                 myGame.MyCombat.Run();
@@ -45,19 +44,22 @@ You raise your fists to for the oncoming battle");
             string prompt = "Where would you like to go?";
             string prompt2 = "";
             string[] options = { "Return to the path", "End Screen" };
-            Menu mainMenu = new Menu(prompt, options, prompt2);
+            Menu mainMenu = new Menu(prompt, options, prompt2, myGame);
             int selectedIndex = mainMenu.Run();
 
             switch (selectedIndex)
             {
                 case 0:
                     {
-                        myGame.MyShop.Run();
+                        Utilities.Delay("you have obtained a strange key");
+                        myGame.MyDefaultPlayer.KeyHeld = true;
+                        Utilities.KeyEntry();
+                        myGame.MyForest_2.Run();
                     }
                     break;
                 case 1:
                     {
-                        myGame.MyVillage.Run();
+                        myGame.MyEndCredits.Run();
                     }
                     break;
             }

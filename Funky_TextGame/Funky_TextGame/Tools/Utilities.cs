@@ -11,14 +11,15 @@ namespace Funky_TextGame
     {
         public static void KeyEntry()
         {
-            WriteLine("\n(Press any key to continue)");
+            Thread.Sleep (1000);
+            WriteLine("\n\n(Press any key to continue)\n");
             ReadKey(true);
 
         }
 
         public static void ExitConsole()
         {
-            WriteLine("\n(Press any key to exit)");
+            WriteLine("\n(Press any key to exit)\n");
             ReadKey(true);
             Environment.Exit(0);
         }
@@ -27,9 +28,10 @@ namespace Funky_TextGame
             foreach (char c in Text)
             {
                 Console.Write(c);
-                Thread.Sleep(40);
+                Thread.Sleep(30);
             }            
         }
+
     }
 
 }

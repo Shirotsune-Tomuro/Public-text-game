@@ -1,4 +1,5 @@
-﻿using Funky_TextGame.StartFunctions;
+﻿using Funky_TextGame.AreaCollection;
+using Funky_TextGame.StartFunctions;
 using Microsoft.VisualBasic;
 using System.Threading.Tasks;
 using static System.Console;
@@ -6,70 +7,104 @@ using static System.Console;
 
 namespace Funky_TextGame.Funky_TextGame.Tools
 {
-    //class ModTools
-    //{
-    //    protected Game myGame;
+    class ModTools
+    {
+        protected Game myGame;        
+        bool CmdActive = false;
+        bool CheatsEnabled = false;
+        public ModTools(Game Game)
+        {
+            myGame = Game;            
+        }
 
-    //    ConsoleKeyInfo keyInfo;
-    //    bool CmdActive = false;
-    //    public ModTools(Game Game)
-    //    {
-    //        myGame = Game;
-    //        Task.Run(HandleInput);
-    //    }
+        public void CmdLine()
+        {
+            CmdActive = true;
+            
 
-    //    void CmdLine()
-    //    {            
-    //        while (CmdActive == true)
-    //        {
-    //            CursorVisible = true;
-    //            WriteLine(">> ");
-    //            string command = Console.ReadLine();
+            while (CmdActive == true)
+            {
+                Clear();
+                WriteLine("\n\nCommand line activated : Type [Help] for available commands \n");
+                CursorVisible = true;
+                Write(">> " );
+                string command = ReadLine();
 
-    //            if (command == "Kill")
-    //            {
-    //                if (myGame.MyEnemy != null)
-    //                {
-    //                    myGame.MyEnemy.CurrentHealth = 0;
-    //                    CmdActive = false;
-    //                }
-    //            }
-    //            else
-    //            {
-    //                WriteLine("That is not a Command");
-    //                CmdActive = false;
-    //                break;
-    //            }
-    //        }
-    //        CursorVisible = false;
-    //    }
-    
-    //async Task HandleInput()
-    //    {
-    //        while (true)
-    //        {
-    //            ConsoleKeyInfo keyInfo = await ActivateCmdLine(); 
+                if (command == "Kill")
+                {
+                    if (CheatsEnabled == true)
+                    {
+                        if (myGame.MyEnemy != null)
+                        {
+                            myGame.MyEnemy.CurrentHealth = 0;
+                        }
+                    }
+                    else
+                    {
+                        WriteLine("You don not have permission for this");
+                        Utilities.KeyEntry();
+                    }
+                }                
+                else if (command == "Help")
+                {
+                    WriteLine(@"Available Commands :
 
-    //            if (keyInfo.Key == ConsoleKey.F1)
-    //            {
-    //                CmdActive = true;
-    //                Console.WriteLine("Command mode activated.");
-    //                CmdLine();
-    //            }          
-    //        }
-    //    }
-    //    //public Task<ConsoleKeyInfo> ActivateCmdLine()
-    //    //{
-    //    //    var CmdKey = new TaskCompletionSource<ConsoleKeyInfo>();
-    //    //    Thread inputThread = new Thread(() =>
-    //    //    {
-    //    //        ConsoleKeyInfo keyInfo = Console.ReadKey(true);
-    //    //        CmdKey.SetResult(keyInfo);
-    //    //    });
-    //    //    inputThread.Start();
-    //    //    return CmdKey.Task;
+[Skills] - Provides a description of player skills
+[Main Menu] - Returns you to the main menu. Warning, progress will not be saved
+[Quit] - Quits the game. Warning, progress will not be saved
+[Exit] - Leaves the menu and returns the player to what they were doing
+[Kill] (Cheat) - If Cheats are enabled, forcefully kills opponent
+[Make it Rain] (Cheat) - If Cheats are enabled,  gives the player 9999 Gold");
+                    Utilities.KeyEntry();
+                }
+                else if (command == "Skills")
+                {
+                    WriteLine(@"[Slash] - A basic attack
+[Charging Blow] - A level 5 attack dealing 250% damage to the enemy. However, you will suffer some damage too
+[Blazing Strike] - A level 10 attack consuming 50 Mana to deal 400% damage
+[Sorcery : Blood Sacrifice] - A level 25 attack consuming 100 mana and 400 health to deal 1000% damage");
+                    Utilities.KeyEntry();
+                }
+                else if (command == "Main Menu")
+                {
+                    myGame.MyMainMenu.Run();
+                }
+                else if (command == "Quit")
+                {
+                    Utilities.ExitConsole();
+                }
+                else if (command == "Exit")
+                {
+                    CmdActive = false;
+                } 
+                else if (command == "Make it Rain")
+                {
+                    if (CheatsEnabled == true)
+                    {
+                        WriteLine("9999 Gold added");
+                        myGame.MyDefaultPlayer.Gold += 9999;
+                        Utilities.KeyEntry();
+                    }
+                    else
+                    {
+                        WriteLine("You don not have permission for this");
+                        Utilities.KeyEntry();
+                    }
+                }
+                else if (command == "Enable Cheats")
+                {
+                    WriteLine("CheatsEnabled");
+                    Utilities.KeyEntry();
+                    CheatsEnabled = true;
+                }
+                else
+                {
+                    WriteLine("That is not a Command");
+                    Utilities.KeyEntry();
+                }
+            }
+            CursorVisible = false;
+        }
 
-    //    //}
-
-    //}
+    }
 }

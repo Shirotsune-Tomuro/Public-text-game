@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Console;
 
 namespace Funky_TextGame.Funky_TextGame.AreaCollection
 {
@@ -18,19 +19,18 @@ namespace Funky_TextGame.Funky_TextGame.AreaCollection
 
         override protected void Start()
         {
+            Clear();
             if (Completed == false)
             {
                 Utilities.Delay(@"You successfully make your way out of the cave and are greeted by a verdant green forest
 It's quite nice, large tall trees, lush bushes with berries and small creatures.");
                 Utilities.KeyEntry();
 
-                Utilities.Delay(@"
-Whilst taking in the sights a wolf approaches you.
+                Utilities.Delay(@"Whilst taking in the sights a wolf approaches you.
 Thankfully it's a friendly wolf and asks for you to pet it");
                 Utilities.KeyEntry();
 
-                Utilities.Delay(@"
-Unfortunately for you a ""Goblin"" has decided to take an interest in you.
+                Utilities.Delay(@"Unfortunately for you a ""Goblin"" has decided to take an interest in you.
 the wolf runs away and you're forced to fight.");
                 Utilities.KeyEntry();
 
@@ -48,7 +48,7 @@ The ""Goblin"" seems to have returned. It looks about as strong as you do");
             string prompt = "Where would you like to go?";
             string prompt2 = "";
             string[] options = { "Towards the cave", "Towards the edge of the forest" };
-            Menu mainMenu = new Menu(prompt, options, prompt2);
+            Menu mainMenu = new Menu(prompt, options, prompt2, myGame);
             int selectedIndex = mainMenu.Run();
 
             switch (selectedIndex)

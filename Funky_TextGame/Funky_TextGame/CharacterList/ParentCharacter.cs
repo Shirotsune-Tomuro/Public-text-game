@@ -59,12 +59,12 @@ namespace Funky_TextGame.CharacterList
             Damage = ((StrengthStat * 10) * 113) / 100;
             MaxHealth = ((HealthStat * 10) * 102) / 100;
             CurrentHealth = MaxHealth;
-            MaxArmorGrowth += (ArmorGrowth * 120) / 100;
+            MaxArmorGrowth += (ArmorGrowth * 110) / 100;
             HealAmount = (MaxHealth * 35) / 100;
             Gold += GoldGrowth;
         }
         protected void LevelUp()
-        {            
+        {
             HealthStat += HealthGrowth;
             StrengthStat += StrengthGrowth;
             Armor += ArmorGrowth;
@@ -81,7 +81,7 @@ namespace Funky_TextGame.CharacterList
                 {
                     Exp -= ReqExp;
                     Level += 1;
-                    WriteLine("\nYou have reached level " + Level + ". Congratulations!");                    
+                    WriteLine("\nYou have reached level " + Level + ". Congratulations!");
                     LevelUp();
 
                 } while (Exp >= ReqExp);

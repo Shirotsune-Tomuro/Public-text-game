@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Console;
 
 namespace Funky_TextGame.Funky_TextGame.AreaCollection
 {
@@ -18,6 +19,7 @@ namespace Funky_TextGame.Funky_TextGame.AreaCollection
 
         protected override void Start()
         {
+            Clear();
             Utilities.Delay($@"So {myGame.MyDefaultPlayer.Name}, you've reched the end huh
 Good job. there's nothing left to do now other than continuing levelling.");
             Utilities.KeyEntry();
@@ -25,7 +27,7 @@ Good job. there's nothing left to do now other than continuing levelling.");
             string prompt = "Would you like to continue a bit more??";
             string prompt2 = "";
             string[] options = { "Yes", "No" };
-            Menu mainMenu = new Menu(prompt, options, prompt2);
+            Menu mainMenu = new Menu(prompt, options, prompt2, myGame);
             int selectedIndex = mainMenu.Run();
 
             switch (selectedIndex)

@@ -29,11 +29,11 @@ namespace Funky_TextGame.StartFunctions
         public List<ParentCharacter> MyCharacterList;
         public DefaultPlayer MyDefaultPlayer;
         public DefaultEnemy MyEnemy;
-        //public ModTools MyModTools;
+        public ModTools MyModTools;
 
         public Game()
         {
-            MyMainMenu = new MainMenu (this);
+            MyMainMenu = new MainMenu(this);
             MyAbout = new About(this);
             MyCombat = new Combat(this);
             MyNameScreen = new Name_Screen(this);
@@ -45,25 +45,23 @@ namespace Funky_TextGame.StartFunctions
             MyShop = new Shop(this);
             MyMegaBoss = new Mega_Boss(this);
             MyEndCredits = new EndCredits(this);
-            //MyModTools = new ModTools(this);
+            MyModTools = new ModTools(this);
             MyCharacterList = new List<ParentCharacter>();
             MyDefaultPlayer = new DefaultPlayer(this);
-            MyCharacterList.Add(MyDefaultPlayer);
+            MyCharacterList.Add(MyDefaultPlayer);           
 
-            //Task inputTask = Task.Run(MyModTools.ActivateCmdLine);
-
-        } 
-        //Spawns an enemy when invoked
+        }
+        //Spawns an enemy when invoked and puts it at the start of the character list
         public void SpawnCharacters()
         {
             MyCharacterList.Add(MyEnemy = new DefaultEnemy(this));
             MyCharacterList.Reverse();
-        }      
+        }
 
         // which level the game will start on
         public void Start()
         {
-            MyMainMenu.Run();           
+            MyMainMenu.Run();
         }
     }
 }

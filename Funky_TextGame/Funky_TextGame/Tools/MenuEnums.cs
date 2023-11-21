@@ -17,6 +17,8 @@ namespace Funky_TextGame
     public enum AttackOptions
     {
         BasicAttack,
-        HeavyAttack
+        HeavyAttack,
+        BlazingStrike,
+        SuperMove
     }      
 }
