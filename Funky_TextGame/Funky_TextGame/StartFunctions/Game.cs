@@ -52,16 +52,16 @@ namespace Funky_TextGame.StartFunctions
 
         }
         //Spawns an enemy when invoked and puts it at the start of the character list
-        public void SpawnCharacters()
+        public void SpawnCharacters(int eLevel)
         {
-            MyCharacterList.Add(MyEnemy = new DefaultEnemy(this));
+            MyCharacterList.Add(MyEnemy = new DefaultEnemy(this, eLevel));
             MyCharacterList.Reverse();
         }
 
         // which level the game will start on
         public void Start()
         {
-            MyCombat.Run();
+            MyMainMenu.Run(default);
         }
     }
 }

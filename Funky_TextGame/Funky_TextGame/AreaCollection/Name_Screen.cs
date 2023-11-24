@@ -11,13 +11,13 @@ namespace Funky_TextGame.Funky_TextGame.AreaCollection
 {
     internal class Name_Screen : Area
     {
-        bool nameset = false;
+        public bool nameset = false;
         public Name_Screen(Game Game) : base(Game)
         {
             Name = "Name_Screen";
             Description = "A Place to name your player";            
         }
-        protected override void Start()
+        protected override void Start(int eLevel)
         {
             Clear();
             Utilities.Delay($@"Welcome to Funky Text Game adventurer
@@ -43,14 +43,14 @@ Before we get into the main game, please name yourself" + "\n\n");
                         nameset = true;
                         break;
                     case 1:
-                        Utilities.Delay("it's not? well what is it then?\n\n");
+                        Utilities.Delay("It's not? well what is it then?\n\n");
                         break;
                 }
             }while (nameset == false);
 
             Utilities.Delay("Brilliant. Let's get started then");
             Utilities.KeyEntry();
-            myGame.MyCave1.Run();
+            myGame.MyCave1.Run(default);
                     
         }
     }

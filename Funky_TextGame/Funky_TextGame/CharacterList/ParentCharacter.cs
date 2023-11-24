@@ -33,7 +33,7 @@ namespace Funky_TextGame.CharacterList
         public int HealAmount = 0;
         public int Mana = 100;
         public int MaxMana = 100;
-        public int LevelCapstone = 10;
+        public int LevelCapstone = 5;
         public int Gold = 0;
         public int GoldGrowth = 0;
 
@@ -65,11 +65,12 @@ namespace Funky_TextGame.CharacterList
         }
         protected void LevelUp()
         {
+            
             HealthStat += HealthGrowth;
             StrengthStat += StrengthGrowth;
             Armor += ArmorGrowth;
             MaxArmor += MaxArmorGrowth;
-            ReqExp = (ReqExp * 175) / 100;
+            ReqExp = (ReqExp * 119) / 100;
             StatAdjustments();
 
         }
@@ -79,8 +80,8 @@ namespace Funky_TextGame.CharacterList
             {
                 do
                 {
-                    Exp -= ReqExp;
                     Level += 1;
+                    Exp -= ReqExp;                    
                     WriteLine("\nYou have reached level " + Level + ". Congratulations!");
                     LevelUp();
 

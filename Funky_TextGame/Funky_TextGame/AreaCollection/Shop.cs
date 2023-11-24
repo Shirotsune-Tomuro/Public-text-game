@@ -20,10 +20,10 @@ namespace Funky_TextGame.Funky_TextGame.AreaCollection
             Description = "A place to purchase upgrades";
         }
 
-        override protected void Start()
+        override protected void Start(int eLevel)
         {
             Clear();
-            Utilities.Delay(@"You approach the caravn and are approached by a ""Kobold"" merchant");
+            Utilities.Delay(@"You approach the caravan and are approached by a ""Kobold"" merchant");
             Utilities.KeyEntry();
 
             string prompt = "What would you like to do?";
@@ -41,7 +41,7 @@ namespace Funky_TextGame.Funky_TextGame.AreaCollection
                     break;
                 case 1:
                     {
-                        myGame.MyForest_2.Run();
+                        myGame.MyForest_2.Run(default);
                     }
                     break;
             }
@@ -49,7 +49,7 @@ namespace Funky_TextGame.Funky_TextGame.AreaCollection
 
         private void Shopping()
         {
-            string prompt = "\"Welcome to GobGob's shop, what would Human like to buy?\"\n\n" + myGame.MyDefaultPlayer.Gold;
+            string prompt = "\"Welcome to GobGob's shop, what would Human like to buy?\"\n\n" + "Gold : " + myGame.MyDefaultPlayer.Gold;
             string prompt2 = "";
             string[] options = { "Mana Stimulant (+100% Mana) : 200 Gold", "Champions Armor (Max Armor +50) : 5000 Gold", "Champions sword (Damage +50%) : 7500 Gold" };
             Menu mainMenu = new Menu(prompt, options, prompt2, myGame);
@@ -61,9 +61,10 @@ namespace Funky_TextGame.Funky_TextGame.AreaCollection
                     {
                         if (owned1 == false)
                         {
-                            if (myGame.MyDefaultPlayer.Gold == 200)
+                            if (myGame.MyDefaultPlayer.Gold >= 200)
                             {
-                                myGame.MyDefaultPlayer.Mana += 100;
+                                myGame.MyDefaultPlayer.Gold -= 200;
+                                myGame.MyDefaultPlayer.MaxMana += 100;
                                 owned1 = true;
                                 Utilities.Delay("This sale pleases GobGob Human");
                             }
@@ -77,15 +78,16 @@ namespace Funky_TextGame.Funky_TextGame.AreaCollection
                             Utilities.Delay("You already own this");
                         }
                         Utilities.KeyEntry();
-                        myGame.MyShop.Run();
+                        myGame.MyShop.Run(default);
                     }
                     break;
                 case 1:
                     {
                         if (owned2 == false)
                         {
-                            if (myGame.MyDefaultPlayer.Gold == 5000)
+                            if (myGame.MyDefaultPlayer.Gold >= 5000)
                             {
+                                myGame.MyDefaultPlayer.Gold -= 5000;
                                 myGame.MyDefaultPlayer.MaxArmor += 50;
                                 owned2 = true;
                                 Utilities.Delay("This sale pleases GobGob Human");
@@ -100,15 +102,16 @@ namespace Funky_TextGame.Funky_TextGame.AreaCollection
                             Utilities.Delay("You already own this");
                         }
                         Utilities.KeyEntry();
-                        myGame.MyShop.Run();
+                        myGame.MyShop.Run(default);
                     }
                     break;
                 case 2:
                     {
                         if (owned3 == false)
                         {                           
-                            if (myGame.MyDefaultPlayer.Gold == 7500)
+                            if (myGame.MyDefaultPlayer.Gold >= 7500)
                             {
+                                myGame.MyDefaultPlayer.Gold -= 7500;
                                 myGame.MyDefaultPlayer.StrengthStat += (myGame.MyDefaultPlayer.StrengthStat * 150) / 100;
                                 owned3 = true;
                                 Utilities.Delay("This sale pleases GobGob Human");
@@ -119,7 +122,7 @@ namespace Funky_TextGame.Funky_TextGame.AreaCollection
                             }
                         }
                         Utilities.KeyEntry();
-                        myGame.MyShop.Run();
+                        myGame.MyShop.Run(default);
                     }
                     break;
             }

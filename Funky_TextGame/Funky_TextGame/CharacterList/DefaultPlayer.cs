@@ -10,9 +10,9 @@ namespace Funky_TextGame.CharacterList
         {
             //Constructor for the player character
             Description = "You the player";
-            Level = 99;
+            Level = 1;
             Armor = 0;
-            StrengthStat -= 6;
+            StrengthStat -= 7;
             HealthStat -= 5;
             Exp = 0;
             ReqExp = 100;

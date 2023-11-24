@@ -17,15 +17,15 @@ namespace Funky_TextGame.Funky_TextGame.AreaCollection
             Description = "A part of the forest nearing the edge";
         }
 
-        override protected void Start()
+        override protected void Start(int eLevel)
         {
             Clear();
             if (Completed == false)
             {
-                Utilities.Delay(@"Saddened by the lack of a wolf pet, you proceed further through the forest.");
+                Utilities.Delay(@"Saddened by the lack of a wolf pet, you proceed further through the forest");
                 Utilities.KeyEntry();
 
-                Utilities.Delay(@"You spot what appears to be a path and begin to follow it, hoping there might be a village or atleast another person.
+                Utilities.Delay(@"You spot what appears to be a path and begin to follow it, hoping there might be a village or atleast another person
 Though as if you were cursed to have poor luck, a Thief has appeared on the path");
                 Utilities.KeyEntry();
 
@@ -34,7 +34,7 @@ Though as if you were cursed to have poor luck, a Thief has appeared on the path
 You raise your fists to for the oncoming battle");
                 Utilities.KeyEntry();
 
-                myGame.MyCombat.Run();
+                myGame.MyCombat.Run(10);                
                 Completed = true;
             }        
             else if (Completed == true)
@@ -47,7 +47,7 @@ There's nothing to do here, people don't come back from the dead silly");
 
             string prompt = "Where would you like to go?";
             string prompt2 = "";
-            string[] options = { "Towards the caravn at the side of the path", "Towards the village past the caravan" };
+            string[] options = { "Towards the caravn at the side of the path", "Towards the village past the caravan - [Level 15]" };
             Menu mainMenu = new Menu(prompt, options, prompt2, myGame);
             int selectedIndex = mainMenu.Run();
 
@@ -55,12 +55,12 @@ There's nothing to do here, people don't come back from the dead silly");
             {
                 case 0:
                     {
-                        myGame.MyShop.Run();
+                        myGame.MyShop.Run(default);
                     }
                     break;
                 case 1:
                     {
-                        myGame.MyVillage.Run();
+                        myGame.MyVillage.Run(default);
                     }
                     break;
             }

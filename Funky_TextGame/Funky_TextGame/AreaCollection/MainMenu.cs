@@ -15,7 +15,7 @@ namespace Funky_TextGame.AreaCollection
             Name = "MainMenu";
             Description = "This is the MainMenu";
         }
-        override protected void Start()
+        override protected void Start(int eLevel)
         {            
             string prompt = @"
  _______           _        _                  _________ _______          _________   _______  _______  _______  _______ 
@@ -26,10 +26,19 @@ namespace Funky_TextGame.AreaCollection
 | (      | |   | || | \   ||  ( \ \    ) (        | |   | (       / ( ) \    | |     | | \_  )| (   ) || |   | || (      
 | )      | (___) || )  \  ||  /  \ \   | |        | |   | (____/\( /   \ )   | |     | (___) || )   ( || )   ( || (____/\
 |/       (_______)|/    )_)|_/    \/   \_/        )_(   (_______/|/     \|   )_(     (_______)|/     \||/     \|(_______/
-                                                                                                                         ";
-            string prompt2 = "Menu controls : [Up]  [Down]  [Enter]" +
-                "\n\n" +
-                "Press [Home] during any menu to open the CmdLine (It's useful) ";
+                                         =====================================
+                                         Developed by - [Ruben James Thompson]
+                                         =====================================
+
+
+
+Menu controls : [Up]  [Down]  [Enter]
+                
+Press [Home] during any menu to open the CmdLine (It's useful) 
+
+
+";
+            string prompt2 = "";
             string[] options = { "play", "About", "Exit" };
             Menu mainMenu = new Menu(prompt, options, prompt2, myGame);
             int selectedIndex = mainMenu.Run();
@@ -37,10 +46,17 @@ namespace Funky_TextGame.AreaCollection
             switch (selectedIndex)
             {
                 case 0:
-                    myGame.MyNameScreen.Run();
+                    if (myGame.MyNameScreen.nameset == false)
+                    {
+                        myGame.MyNameScreen.Run(default); 
+                    }
+                    else
+                    {
+                        myGame.MyCave1.Run(default);
+                    }
                     break;
                 case 1:
-                    myGame.MyAbout.Run();
+                    myGame.MyAbout.Run(default);
                     break;
                 case 2:
                     Utilities.ExitConsole();

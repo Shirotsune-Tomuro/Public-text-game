@@ -29,10 +29,10 @@ namespace Funky_TextGame.Funky_TextGame.AreaCollection
             Name = "placeholder text";
             Description = "placeholder text 2";
         }
-        override protected void Start()
-        {
+        override protected void Start(int eLevel)
+        {           
             //spawns an enemy from the game class and then strats combat            
-            myGame.SpawnCharacters();
+            myGame.SpawnCharacters(eLevel);
             StartCombat();
         }
 
@@ -43,12 +43,12 @@ namespace Funky_TextGame.Funky_TextGame.AreaCollection
                 //displays combat information and creates the menu every frame
                 string prompt = $@"You have engaged in combat
 
-    {myGame.MyDefaultPlayer.Name}          Enemy
-Level : {myGame.MyDefaultPlayer.Level}      Level  :   {myGame.MyEnemy.Level}
-Health : {myGame.MyDefaultPlayer.CurrentHealth}     Health :   {myGame.MyEnemy.CurrentHealth}
+  {myGame.MyDefaultPlayer.Name}          Enemy
+ Level : {myGame.MyDefaultPlayer.Level}      Level  :   {myGame.MyEnemy.Level}
+Health : {myGame.MyDefaultPlayer.CurrentHealth}    Health :   {myGame.MyEnemy.CurrentHealth}
 Damage : {myGame.MyDefaultPlayer.Damage}    Damage :   {myGame.MyEnemy.Damage}
-Armor : {myGame.MyDefaultPlayer.Armor}     Armor :   {myGame.MyEnemy.Armor}
-Mana : {myGame.MyDefaultPlayer.Mana}";
+ Armor : {myGame.MyDefaultPlayer.Armor}      Armor :   {myGame.MyEnemy.Armor}
+  Mana : {myGame.MyDefaultPlayer.Mana}";
                 string[] options = { option1, option2, option3, option4, option5 };
                 Menu mainMenu = new Menu(prompt, options, prompt2, myGame);
                 int selectedIndex = mainMenu.Run();

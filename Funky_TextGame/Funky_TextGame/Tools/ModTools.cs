@@ -1,6 +1,7 @@
 ﻿using Funky_TextGame.AreaCollection;
 using Funky_TextGame.StartFunctions;
 using Microsoft.VisualBasic;
+using System;
 using System.Threading.Tasks;
 using static System.Console;
 
@@ -12,6 +13,9 @@ namespace Funky_TextGame.Funky_TextGame.Tools
         protected Game myGame;        
         bool CmdActive = false;
         bool CheatsEnabled = false;
+        public int GenNum;
+
+            
         public ModTools(Game Game)
         {
             myGame = Game;            
@@ -62,12 +66,15 @@ namespace Funky_TextGame.Funky_TextGame.Tools
                     WriteLine(@"[Slash] - A basic attack
 [Charging Blow] - A level 5 attack dealing 250% damage to the enemy. However, you will suffer some damage too
 [Blazing Strike] - A level 10 attack consuming 50 Mana to deal 400% damage
-[Sorcery : Blood Sacrifice] - A level 25 attack consuming 100 mana and 400 health to deal 1000% damage");
+[Sorcery : Blood Sacrifice] - A level 25 attack consuming 100 mana and 400 health to deal 1000% damage
+[Armor Crush] - Reduces enemy armor by 60%
+[Defend] - Increases your armor until its cap
+[Heal] - Restores 35% of your maximum HP");
                     Utilities.KeyEntry();
                 }
                 else if (command == "Main Menu")
                 {
-                    myGame.MyMainMenu.Run();
+                    myGame.MyMainMenu.Run(default);
                 }
                 else if (command == "Quit")
                 {
@@ -104,6 +111,17 @@ namespace Funky_TextGame.Funky_TextGame.Tools
                 }
             }
             CursorVisible = false;
+        }
+
+        public void GenerateLevel()
+        {
+            var rand = new Random();
+            GenNum = rand.Next(myGame.MyDefaultPlayer.Level - 3, myGame.MyDefaultPlayer.Level + 3);
+
+            if (GenNum <= 0)
+            {
+                GenNum = 1;
+            }
         }
 
     }

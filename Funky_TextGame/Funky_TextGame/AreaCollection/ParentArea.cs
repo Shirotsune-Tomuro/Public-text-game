@@ -24,12 +24,12 @@ namespace Funky_TextGame.AreaCollection
             myGame = Game;
         }
         //this can be edited per child
-        public void Run()
+        public void Run(int eLevel)
         {
-            Start();
+            Start(eLevel);
         }
 
-        virtual protected void Start()
+        virtual protected void Start(int eLevel)
         {
         }
     }

@@ -15,13 +15,13 @@ namespace Funky_TextGame.Funky_TextGame.AreaCollection
             Name = "Cave - 2";
             Description = "A dark dank cave filled with an evil aura";
         }
-        override protected void Start()
+        override protected void Start(int eLevel)
         {
             Utilities.Delay($@"You have entered further into the cave
 There is a sign on the groud with a message written on it
 
 ""Dev Note - this place is designed to test your skill in combat
-do not enter this place recklessly""");
+Do not enter this place recklessly""");
             Utilities.KeyEntry();
 
             do
@@ -36,12 +36,13 @@ do not enter this place recklessly""");
                 {
                     case 0:
                         {
-                            myGame.MyCombat.Run();
+                            myGame.MyModTools.GenerateLevel();
+                            myGame.MyCombat.Run(myGame.MyModTools.GenNum);
                         }
                         break;
                     case 1:
                         {
-                            myGame.MyCave1.Run();
+                            myGame.MyCave1.Run(default);
                         }
                         break;
                 }

@@ -14,8 +14,8 @@ namespace Funky_TextGame.AreaCollection
         {
              Name = "About page";
              Description = "Provides information about the game and its developer";
-        }      
-        override protected void Start()
+        }
+        override protected void Start(int eLevel)
         {       
 
             Clear();
@@ -27,7 +27,7 @@ namespace Funky_TextGame.AreaCollection
                                   "but also allow you to have a bit of fun.\n");           
             Utilities.KeyEntry();
             Clear();
-            myGame.MyMainMenu.Run();
+            myGame.MyMainMenu.Run(0);
         }
     }
 }

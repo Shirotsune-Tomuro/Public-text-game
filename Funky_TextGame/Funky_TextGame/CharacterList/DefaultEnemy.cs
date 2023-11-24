@@ -3,6 +3,7 @@ using Funky_TextGame.StartFunctions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using static System.Console;
@@ -12,57 +13,47 @@ namespace Funky_TextGame.CharacterList
     class DefaultEnemy : ParentCharacter
     {
         int GenNum;
-        public DefaultEnemy(Game Game) : base(Game)
+        public DefaultEnemy(Game Game, int GenNum) : base(Game)
         {            
             Description = "The enemy";
             Name = "placeholder name";
 
-            GenerateNum();
+            myGame.MyModTools.GenerateLevel();
             Level = GenNum;
             Armor = 0;
             StrengthStat -= 8;
-            HealthStat += 10;
+            HealthStat += 6;
             HealthGrowth = 7;
             StrengthGrowth = 1;
-            ArmorGrowth = 2;
+            ArmorGrowth = 3;
             Gold = 10;
             GoldGrowth = 1;
 
-            Exp = 15 * Level;
+            Exp = 15;
             StatAdjustments();
             LevelAdjustments();
         }
-
-        private void GenerateNum()
-        {            
-            var rand = new Random();
-            GenNum = rand.Next(myGame.MyDefaultPlayer.Level - 3, myGame.MyDefaultPlayer.Level + 5);
-
-            if (GenNum <= 0) 
-            {
-                GenNum = 1;
-            }
-        }
+       
         override protected void StatAdjustments()
         {
             Damage = ((StrengthStat * 10) * 32) / 100;
             MaxHealth = ((HealthStat * 10) * 173) / 100;
             CurrentHealth = MaxHealth;
             MaxArmorGrowth = (ArmorGrowth * 2);
-            Exp = (Exp * 135) / 100;
+            Exp = (Exp * 115) / 100;
 
             if (Level >= LevelCapstone)
             {
                 HealthGrowth += 3;
                 ArmorGrowth += 1;
-                LevelCapstone += 10;
+                LevelCapstone += 5;
             }
 
         }
 
         public void RandomShenanigan()
         {
-            if (Damage >= myGame.MyDefaultPlayer.Armor)
+            if (Damage >= (myGame.MyDefaultPlayer.Armor * 115) /100)
             {
                 var rand = new Random();
                 int SelectedIndex = 0;
